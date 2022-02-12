@@ -1,0 +1,4 @@
+# Don't track any of these files
+node_modules/
+DescriereDetaliata.docx
+DescriereDetaliataRAW.txt
