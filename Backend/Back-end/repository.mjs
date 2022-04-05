@@ -184,7 +184,7 @@ async function initialize() {
     await sequelize.authenticate();
     await sequelize.sync({
         alter: true,
-        //force:true
+        force:true
     });
 }
 
