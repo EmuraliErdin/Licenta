@@ -1,8 +1,0 @@
-# Don't track any of these files
-node_modules/
-.gitihnore
-.elasticbeanstalk/
-# Elastic Beanstalk Files
-.elasticbeanstalk/*
-!.elasticbeanstalk/*.cfg.yml
-!.elasticbeanstalk/*.global.yml
