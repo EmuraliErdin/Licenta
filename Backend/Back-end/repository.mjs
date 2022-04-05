@@ -176,11 +176,7 @@ Departament.hasMany(Employee, {
 })
 
 
-
-
 async function initialize() {
-    
-    
     await sequelize.authenticate();
     await sequelize.sync({
         alter: true,
