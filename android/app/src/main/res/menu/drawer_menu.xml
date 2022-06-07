@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/item_profile"
+            android:title="@string/profile"
+            android:icon="@drawable/ic_profile"/>
+        <item
+            android:id="@+id/item_add_time"
+            android:title="@string/add_time"
+            android:icon="@drawable/ic_more_time"/>
+        <item
+            android:id="@+id/item_subtract_time"
+            android:title="@string/subtract_time"
+            android:icon="@drawable/ic_less_time"/>
+        <item
+            android:id="@+id/item_my_requests"
+            android:title="@string/my_requests"
+            android:icon="@drawable/ic_requests"/>
+
+        <item
+            android:id="@+id/item_colleagues_requests"
+            android:title="@string/colleagues_requests"
+            android:icon="@drawable/ic_requests"/>
+    </group>
+
+    <item android:title="@string/communicate">
+        <menu>
+            <item
+                android:id="@+id/report_a_problem"
+                android:title="@string/report_a_problem"
+                android:icon="@drawable/ic_problem"/>
+        </menu>
+    </item>
+</menu>

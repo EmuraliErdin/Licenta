@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:ignore="SpeakableTextPresentCheck">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".activities.fragments.employee.EarlyWorkRequestFragment">
+
+        <TextView
+            android:id="@+id/tvEmployeeFragmentEarlyRequestTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="@string/early_work_request_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/edtEmployeeFragmentEarlyReason"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:ems="10"
+            android:hint="@string/reason"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="@+id/tvEmployeeFragmentEarlyRequestTitle"
+            app:layout_constraintStart_toStartOf="@+id/tvEmployeeFragmentEarlyRequestTitle"
+            app:layout_constraintTop_toBottomOf="@+id/tvEmployeeFragmentEarlyRequestTitle" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="@string/request_date"
+            app:layout_constraintEnd_toEndOf="@+id/edtEmployeeFragmentEarlyReason"
+            app:layout_constraintStart_toStartOf="@+id/edtEmployeeFragmentEarlyReason"
+            app:layout_constraintTop_toBottomOf="@+id/edtEmployeeFragmentEarlyReason" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="@string/number_of_hours"
+            app:layout_constraintEnd_toEndOf="@+id/calendarEmployeeFragmentEarly"
+            app:layout_constraintStart_toStartOf="@+id/calendarEmployeeFragmentEarly"
+            app:layout_constraintTop_toBottomOf="@+id/calendarEmployeeFragmentEarly" />
+
+        <EditText
+            android:id="@+id/edtEmployeeFragmentEarlyNumberOfHours"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:ems="10"
+            android:inputType="numberDecimal"
+            app:layout_constraintEnd_toEndOf="@+id/textView9"
+            app:layout_constraintHorizontal_bias="0.432"
+            app:layout_constraintStart_toStartOf="@+id/textView9"
+            app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+        <Button
+            android:id="@+id/btnEmployeeFragmentEarlySubmit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="@string/submit"
+            app:layout_constraintEnd_toEndOf="@+id/edtEmployeeFragmentEarlyNumberOfHours"
+            app:layout_constraintStart_toStartOf="@+id/edtEmployeeFragmentEarlyNumberOfHours"
+            app:layout_constraintTop_toBottomOf="@+id/edtEmployeeFragmentEarlyNumberOfHours" />
+
+        <CalendarView
+            android:id="@+id/calendarEmployeeFragmentEarly"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</ScrollView>

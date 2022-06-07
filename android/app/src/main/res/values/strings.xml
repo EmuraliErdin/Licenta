@@ -1,0 +1,61 @@
+<resources>
+    <string name="app_name">Licenta</string>
+    <string name="username">UserName</string>
+    <string name="password">Password</string>
+    <string name="forgot_password">I forgot my password</string>
+    <string name="authenticate">Authenticate</string>
+    <string name="create_account">Create account</string>
+    <string name="last_name">Last name</string>
+    <string name="first_name">First name</string>
+    <string name="email_user_name">Email</string>
+    <string name="is_manager">Check if you are the manager of the department</string>
+    <string name="department">Department</string>
+    <string name="back">Back</string>
+    <string name="url">http://10.0.2.2:8080/api/</string>
+    <string name="add_time">\"I worked overtime\" request</string>
+    <string name="subtract_time">\"I want to leave early\" request</string>
+    <string name="profile">Profile</string>
+    <string name="communicate">Communicate</string>
+    <string name="report_a_problem">Report a problem</string>
+    <string name="my_requests">My requests</string>
+    <string name="tvNameMock">John Doe</string>
+    <string name="tvEmailMock">John.Doe@gmail.com</string>
+    <string name="open_toggle">Open</string>
+    <string name="close_toggle">Close</string>
+    <string name="password_change">Change your password</string>
+    <string name="old_password">Old password</string>
+    <string name="new_password">New password</string>
+    <string name="overtime_work_request_title">\"I worked overtime\" request</string>
+    <string name="reason">Reason</string>
+    <string name="request_date">Request date</string>
+    <string name="number_of_hours">Number of hours</string>
+    <string name="submit">Submit</string>
+    <string name="early_work_request_title">\"I want to leave early\" request</string>
+    <string name="report_a_problem_header">Please report a problem you found</string>
+    <string name="emailed_code">Please input the code from the email you recieved.</string>
+    <string name="employees_requests">Employees requests</string>
+    <string name="stats">Statistics for department</string>
+    <string name="see_employees">Department members</string>
+    <string name="perform_long_click">Perform a long tap on any item to open a menu</string>
+    <string name="expire">The code will expire in:</string>
+    <string name="give_role">Give a role to</string>
+    <string name="end_date">The role is effective until the selected date.</string>
+    <string name="change_role">Change role</string>
+    <string name="colleagues_requests">See colleagues requests</string>
+    <string name="make_department">build a new department</string>
+    <string name="recover_password">Recover password</string>
+
+    <array name="urgency_levels">
+        <item>Urgent</item>
+        <item>High</item>
+        <item>Medium</item>
+        <item>Low</item>
+    </array>
+
+    <array name="roles">
+        <item>NONE</item>
+        <item>READ_WRITE_COLLEAGUES</item>
+        <item>READ_COLLEAGUES</item>
+    </array>
+
+</resources>
