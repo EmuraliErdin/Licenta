@@ -1,11 +1,12 @@
 import express, { request, response } from 'express';
-import { Employee, Request, Departament, Access, Issue, TemporaryCode} from './repository.mjs';
+import { Employee, Request, Departament, Access, Issue, TemporaryCode, Log, Experience} from './repository.mjs';
 import {
     getRecords, postRecord, deleteRecords,
     getRecord, headRecord, deleteRecord, putRecord, patchRecord, 
-    getChildrenOfParent, postChildOfParent,
-    getChildOfParent, deleteChildOfParent, putChildOfParent,login, changePassword,
-    createAccountFirstPart, createAccountSecondPart, getRequestsOfDepartment
+    getChildrenOfParent, postChildOfParent, getRequestsOfEmployee, 
+    getChildOfParent, deleteChildOfParent, putChildOfParent, login, changePassword,
+    createAccountFirstPart, createAccountSecondPart, getRequestsOfDepartment, setRoleOfEmployee, getRoleOfEmployee, forgotPassword,
+    getFreeHoursOfYear, sendNotificationToEmployee
 } from './service.mjs';
 
 const router = express.Router();
@@ -48,14 +49,23 @@ router.route('/requests')
     .patch((request, response)=> patchRecord(Departament, request, response))
     .delete((request, response)=> deleteRecord(Departament, request, response))
 
-  
+    router.route('/experiences')
+    .get((request, response)=> getRecords(Experience, request, response))
+    .post((request, response)=> postRecord(Experience, request, response))
+    .delete((request, response)=> deleteRecords(Experience, request, response))
+
+    router.route('/logs')
+    .get((request, response)=> getRecords(Log, request, response))
+    .post((request, response)=> postRecord(Log, request, response))
+    .delete((request, response)=> deleteRecords(Log, request, response))
+
   router.route('/departments/:fid/employees')
     .get((request,response)=>getChildrenOfParent(Departament,'employee',request,response))
     .post((request,response)=>postChildOfParent(Departament,'departament',Student,request,response))
     
     router.route('/accesses')
     .get((request, response)=> getRecords(Access, request, response))
-    .post((request, response)=> postRecord(Access, request, response))
+    .post((request, response)=> setRoleOfEmployee(request, response))
     .delete((request, response)=> deleteRecords(Access, request, response))
     
     router.route('/accesses/:id')
@@ -82,13 +92,21 @@ router.route('/requests')
     .get((request,response)=>getRecords(TemporaryCode,request,response))
     .delete((request,response)=>deleteRecords(TemporaryCode,request,response))
 
-
    router.route('/employees/:fid/requests')
-   .get((request,response)=>getChildrenOfParent(Employee,'request',request,response))
+   .get((request,response)=>getRequestsOfEmployee(request,response))
    .post((request,response)=>postChildOfParent(Employee,'employee',Request,request,response))
 
-   router.route('/teams/:fid/jury')
-   .get((request,response)=>getChildrenOfParent(Team,'jury',request,response))
+   router.route('/employees/:fid/experiences')
+   .get((request,response)=>getChildrenOfParent(Employee,'experience',request,response))
+   .post((request,response)=>postChildOfParent(Employee,'employee',Experience,request,response))
+
+   router.route('/employees/:fid/logs')
+   .get((request,response)=>getChildrenOfParent(Employee,'log',request,response))
+   .post((request,response)=>postChildOfParent(Employee,'employee',Request,request,response))
+
+   router.route('/employees/:fid/roles')
+   .get((request,response)=>getRoleOfEmployee(request,response))
+   .post((request,response)=>postChildOfParent(Employee,'employee',Request,request,response))
 
    router.route('/departments/:fid/employees/:sid')
    .get((request,response)=>getChildrenOfParent(Jury,'student',request,response))
@@ -109,5 +127,13 @@ router.route('/requests')
    router.route('/secondPartCreateAccount')
    .post((request,response)=>createAccountSecondPart(request,response))
 
+   router.route('/passwordForgot')
+   .post((request,response)=>forgotPassword(request,response))
+
+   router.route('/getFreeHoursOfYear/:year/:departmentId')
+   .get((request,response)=>getFreeHoursOfYear(request,response))
+   
+   router.route('/notificationRequest')
+   .post((request, response)=> sendNotificationToEmployee(request, response))
 
     export default router;

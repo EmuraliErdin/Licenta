@@ -57,6 +57,10 @@ const Issue = sequelize.define('issue',{
             min:5
         }
     },
+    priorityLevel:{
+        type:Sequelize.STRING,
+        allowNull: false
+    },
     createDate:{
         type:Sequelize.STRING,
         allowNull: false
@@ -82,6 +86,26 @@ const TemporaryCode  = sequelize.define('temporaryCode', {
         type:Sequelize.INTEGER,
     }
 
+});
+
+const Log  = sequelize.define('log', {
+    id: {
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
+        primaryKey: true
+    },
+    action:{
+        type:Sequelize.STRING,
+        allowNull:false
+    },
+    createDate:{
+        type:Sequelize.STRING,
+        allowNull:false
+    },
+    employeeId:{
+        type:Sequelize.UUID,
+        allowNull:false
+    }
 });
 
 const Request = sequelize.define('request',{
@@ -132,9 +156,12 @@ const Departament = sequelize.define('department',{
         allowNull: false,
         primaryKey: true
     },
-    title:Sequelize.STRING
+    title:{
+        type:Sequelize.STRING,
+        allowNull:false,
+        unique:true
+    }
 })
-
 
 const Access = sequelize.define('access',{
     id: {
@@ -151,15 +178,45 @@ const Access = sequelize.define('access',{
     },
     givenTo:{
         type:Sequelize.UUID,
-        validate:{
-            allowNull:false
-        }
+        allowNull:false
+        
     },
     from:{
         type:Sequelize.UUID,
-        validate:{
-            allowNull:false
-        }
+        allowNull:false
+    },
+    startDate:{
+        type:Sequelize.STRING,
+        allowNull:false
+    },
+    endDate:{
+        type:Sequelize.STRING,
+        allowNull:false
+    }
+})
+
+const Experience = sequelize.define('experience',{
+    id: {
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
+        allowNull: false,
+        primaryKey: true
+    },
+    xp:{
+        type:Sequelize.INTEGER,
+    },
+    employeeId:{
+        type:Sequelize.UUID,
+        allowNull:false
+        
+    },
+    reason:{
+        type:Sequelize.STRING,
+        allowNull:false
+    },
+    createDate:{
+        type:Sequelize.STRING,
+        allowNull:false
     }
 })
 
@@ -171,8 +228,24 @@ Request.belongsTo(Employee, {
     foreignKey: 'employeeId'
 });
 
+Employee.hasMany(Experience, {
+    foreignKey: 'employeeId'
+});
+
+Experience.belongsTo(Employee, {
+    foreignKey: 'employeeId'
+});
+
 Departament.hasMany(Employee, {
     foreignKey:'departmentId'
+})
+
+Employee.hasMany(Log,{
+    foreignKey: 'employeeId'
+});
+
+Log.belongsTo(Employee,{
+    foreignKey: 'employeeId'
 })
 
 
@@ -180,7 +253,7 @@ async function initialize() {
     await sequelize.authenticate();
     await sequelize.sync({
         alter: true,
-        force:true
+        //force:true
     });
 }
 
@@ -191,5 +264,7 @@ export {
     Request,
     Access,
     Issue,
-    TemporaryCode
+    TemporaryCode,
+    Log,
+    Experience
 }

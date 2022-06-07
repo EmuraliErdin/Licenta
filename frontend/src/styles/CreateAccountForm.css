@@ -1,0 +1,102 @@
+*{
+    margin:0;
+}
+
+#create-acc-container-grid{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ddd;
+}
+.create-acc-container{
+    width: 50%;
+    height: 65%;
+    margin:auto;
+    background-color: #f5f5f5;
+    border-radius: 0% 0% 0% 0% / 0% 0% 0% 0% ;
+    color: white;
+    box-shadow: 20px 20px rgba(0,0,0,.15);
+    transition: all .3s ease;
+    display: grid;
+    grid-template-columns: 1fr 5fr 1fr;
+    grid-template-rows: repeat(9,1fr);
+    gap:10px;
+    align-items:center;
+    justify-items:center;
+}
+
+.create-acc-container:hover{
+    border-radius: 0% 0% 50% 50% / 0% 0% 5% 5% ;
+    box-shadow: 10px 10px rgba(0,0,0,.25);
+    background-color: #a0d6b4;
+      
+}
+
+#create-acc-header-text{
+    grid-row:1/2;
+    grid-column: 2/3;
+    align-self:end;
+    color: #100c08;
+}
+
+#create-acc-first-name{
+    grid-row:2/3;
+    grid-column: 2/3;
+    align-self:end;
+}
+#create-acc-last-name{
+    grid-row:3/4;
+    grid-column: 2/3;
+    align-self:end;
+
+}
+
+#create-acc-email{
+    grid-row:4/5;
+    grid-column: 2/3;
+    align-self:end;
+
+}
+
+#create-acc-pass{
+    grid-row:5/6;
+    grid-column: 2/ 3;
+}
+
+#create-acc-input-is-manager{
+    grid-row:6/7;
+    grid-column: 2/3;
+    display: grid;
+    align-self: start;
+    align-items: center;
+    justify-items: center;
+}
+
+#create-acc-input-is-manager h3{
+    color:#100c08;
+    margin-bottom: 10px;
+}
+
+#create-acc-is-manager{
+    align-self: center;
+
+}
+#create-acc-dropdown{
+    grid-row:7/8;
+    grid-column: 2/3;
+}
+#create-acc-btn-submit{
+    grid-row:8/9;
+    grid-column: 2/3;
+    align-self: start;
+}
+
+#create-acc-dialog-text{
+    margin:0;
+}
+#create-acc-dialog-code{
+    align-self: center;
+}
+

@@ -9,7 +9,7 @@ application.use(cors());
 
 application.use('/api', routes);
 
-const port = process.env.PORT;
+const port = 8080;
 
 application.listen(port, async () =>{
     try {

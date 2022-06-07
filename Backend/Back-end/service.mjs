@@ -1,8 +1,7 @@
 import Sequelize from "sequelize";
-import {Employee, Departament,Request,Access, TemporaryCode} from "./repository.mjs"
-import {sendEmailTo} from './mail.mjs'
-
-
+import generator from "generate-password"
+import {Employee, Departament, Request, Access, TemporaryCode, Log, Experience} from "./repository.mjs"
+import {sendEmailTo, sortByDate, formatDate} from './utils.mjs'
 
 function valid(Model, payload){
     console.warn(Object);
@@ -25,6 +24,7 @@ function valid(Model, payload){
             return undefined;
         }
     }
+
     function where(request){
         if(request.query.filter){
            return request.query.filter.split(',').reduce((filter,condition)=>{
@@ -46,6 +46,7 @@ function valid(Model, payload){
                 attributes: attributes(request),
                 where: where(request)
             });
+
             if(records.length > 0){
                 response.status(200).json(records);
             } else {
@@ -57,10 +58,10 @@ function valid(Model, payload){
     }
 
     async function postRecord(Model, request, response){
+        
         try{
-            
+           
             if(valid(Model, request.body)) {
-                
                 let record = await Model.create(request.body);
                 response.status(201)
                 .location(`http://${request.headers.host}${request.baseUrl}${request.url}${request.url.endsWith('/')? '' : '/'}${record.id}`).
@@ -125,11 +126,12 @@ function valid(Model, payload){
 
     async function putRecord(Model, request, response){
         try{
+            console.log(request.body);
             let record = await Model.findByPk(request.params.id);
             if(record){
                if(valid(Model, request.body)){
                 await record.update(request.body);
-                response.status(400).send();
+                response.status(200).send();
                }
             else{
                 response.status(400).send();
@@ -148,6 +150,28 @@ function valid(Model, payload){
             if (record){
                 Object.entries(request.body).forEach(([name, value]) => record[name] = value);
                 await record.save();
+                if(Model==Request){
+                    let requestM = record.dataValues
+                    if(requestM.status=='ACCEPTED' && requestM.type=='ADD_HOURS'){
+                        
+                        const xpM = {
+                            reason:"Request:ADD_HOURS",
+                            createDate : requestM.requestDate,
+                            employeeId: requestM.employeeId,
+                            xp:(requestM.numberOfHours*20)
+                        }
+                        let xpRecord = await Experience.create(xpM);
+                    }
+                    let employee = await Employee.findByPk(requestM.employeeId)
+                    let log = {
+                        action:`${requestM.status} request for ${employee.dataValues.firstName}  ${employee.dataValues.lastName}`,
+                        createDate:formatDate(new Date()),
+                        employeeId: request.body.employeeLogId
+                    }
+                    let logM = await Log.create(log)
+                    
+                    sendNotificationToEmployee(employee.dataValues.firstName,employee.dataValues.email, requestM.reason, requestM.status)
+                }
                 response.status(204).send();
                 }
              else{
@@ -179,7 +203,13 @@ function valid(Model, payload){
                     case 'access':
                         children =  await parent.getAccesss();
                         break;
-                }
+                    case 'log':
+                        children = await parent.getLogs();
+                        break;
+                    case 'experience':
+                        children = await parent.getExperiences();
+                        break;
+                    }
     
                 if(children!=='')
                 {
@@ -219,6 +249,12 @@ function valid(Model, payload){
                     case 'access':
                         children =  await parent.getAccesss();
                         break;
+                    case 'log':
+                        children = await parent.getLogs();
+                        break;
+                    case 'experience':
+                        children = await parent.getExperiences();
+                        break;
                 }
                 await Child.create(child);
                 response.status(201).json(child);
@@ -252,6 +288,11 @@ function valid(Model, payload){
                     case 'access':
                         children =  await parent.getAccesss();
                         break;
+                    case 'log':
+                        children = await parent.getLogs();
+                        break;
+                    case 'experience':
+                        children = await parent.getExperiences();
                 }
                 const child = children.shift();
     
@@ -293,6 +334,8 @@ function valid(Model, payload){
                     case 'access':
                         children =  await parent.getAccesss();
                         break;
+                    case 'log':
+                        children = await parent.getLogs();
                 }
     
                 const child = children.shift()
@@ -335,6 +378,8 @@ function valid(Model, payload){
                     case 'access':
                         children =  await parent.getAccesss();
                         break;
+                    case 'log':
+                        children = await parent.getLogs();
                 }
     
                 const child = children.shift()
@@ -380,12 +425,11 @@ function valid(Model, payload){
                     Object.entries(request.body).forEach(([name, value]) => record[name] = value);
                     record["password"]=request.body.newPassword;
                     await record.save();
-                    response.status(200).json({message:"Modified."}).send();
+                    response.status(200).json({message:"Record has been modified!"}).send();
                 }
                 else{
                     response.status(404).send();
                 }
-
             }
              else{
                  response.status(404).send();
@@ -401,27 +445,25 @@ function valid(Model, payload){
         try{
             let record = await Employee.findOne({where:{email:request.body.email}});
             let recordTemp = await TemporaryCode.findByPk(request.body.email);
-            
             if(record!=null){
                 response.status(400).json({message:"Account already exists"}).send();
                 return;
             }
             
             if( recordTemp!=null){
-               
                 response.status(200).json({message:"The account already exists for this email or the confirmation email has been sent already."}).send();
             }else{
                 
                 let randomNumber = Math.floor(1000 + Math.random() * 9000);
                 
-                let text = "Hello "+request.body.firstName+",\n\n"+
+                const text = "Hello "+request.body.firstName+",\n\n"+
                             "Your verification code is: "+randomNumber+"\n"+
                             "Please don't respond to this email as it is a non-reply email account.\n\n"+
                             "Thank you!\n"+
                             "Emurali Erdin-Alexandru";
                 
+                sendEmailTo(text,request.body.email,"Account verification")
                 
-                sendEmailTo(text,request.body.email)
                 
                 let object = {
                     email:request.body.email,
@@ -433,7 +475,7 @@ function valid(Model, payload){
 
                 setTimeout(async () => {
                     await record.destroy();
-                }, 100000);
+                }, 600000);
 
                 response.status(200).json({message:"OK"}).send();
             }
@@ -466,10 +508,9 @@ function valid(Model, payload){
 
     }
 
-    async function getRequestsOfDepartment(request, response){
+    async function getRequestsOfDepartment(request, response) {
         try{
             let department = await Departament.findByPk(request.params.id);
-
 
             if(department){
                 let employees = await Employee.findAll({where:{departmentId:department.dataValues.id}});
@@ -483,8 +524,8 @@ function valid(Model, payload){
                         requests.push(requestsOfEmployee[j].dataValues);
                     }
                 }
-
-                response.status(200).send(requests);
+                
+                response.status(200).send(sortByDate(requests).reverse());
             }
             else{
                 response.status(404).json({message:"Department not found"});
@@ -495,8 +536,144 @@ function valid(Model, payload){
             console.warn(error);
             response.status(500).json(error);
         }
-        
+    }
 
+    async function setRoleOfEmployee(request,response) {
+        try{
+            const role = await Access.findOne({where: { givenTo:request.body.givenTo} });
+            
+            if(role!==null){
+                await role.destroy();
+            }
+            
+            if(request.body.type!=="NONE"){
+                postRecord(Access,request,response);
+            }
+  
+        } catch(error){
+            response.status(500).json(error);
+        }
+
+    }
+
+    async function getRoleOfEmployee(request,response) {
+        try{
+           
+            const role = await Access.findOne({where: { givenTo:request.params.fid} });
+
+            if(role!==null) {
+                response.status(200).json(role);
+            }
+            else {
+                response.status(404).send();
+            }
+  
+        } catch(error){
+            response.status(500).json(error);
+        }
+
+    }
+
+    async function getRequestsOfEmployee(request, response) {
+        try{
+            const parent = await Employee.findByPk(request.params.fid)// first id
+            if (parent) {   
+                let children = await parent.getRequests();
+    
+                if(children.length!==0)
+                {
+                    const sortedRequests = []
+                    for(let i=0;i<children.length;i++){
+                        sortedRequests.push(children[i].dataValues)
+                    }
+                    response.status(200).json(sortByDate(sortedRequests).reverse());
+                }
+                else{
+                    throw new err;
+                }
+    
+            } else {
+                response.status(404).send();
+            }
+        } catch (err) {
+            console.warn(err);
+            response.status(500).send();
+        }
+    }
+
+    async function forgotPassword(request, response) {
+
+        try{
+            const employee = await Employee.findOne({where: { email:request.body.email}});
+            
+            if(employee) {
+                let password = generator.generate({
+                    length: 10,
+                    numbers: true
+                });
+
+                employee["password"]=password;
+                await employee.save();
+                
+                const text = "Hello "+employee.dataValues.firstName+",\n\n"+
+                "Your new password is: "+password+"\n"+
+                "Please change your password from the profile menu as soon as possible.\n"+
+                "Please don't respond to this email as this is a non-reply email account.\n\n"+
+                "Thank you!\n"+
+                "Emurali Erdin-Alexandru";
+
+                sendEmailTo(text,request.body.email,"Password change")
+                response.status(200).json({message:"OK"}).send();
+            }
+            else {
+                response.status(404).send();
+            }
+  
+        } catch(error){
+            response.status(500).json(error);
+        }
+    }
+
+    async function getFreeHoursOfYear(request, response){
+        const year = request.params.year;
+        const departmentId = request.params.departmentId;
+        let requestList=[];
+        let employees =  await Employee.findAll({where:{departmentId: departmentId}});
+        for(let employee of employees){
+            let requests = await Request.findAll({where:{employeeId:employee.dataValues.id}});
+            for(let request of requests){
+                requestList.push(request.dataValues)
+            }
+        }
+
+        let listToSend = new Array(12).fill(0);
+
+        for(let request of requestList){
+            let currDate = new Date(request.requestDate)
+            if(new Date(currDate).getFullYear()==year){
+                listToSend[currDate.getMonth()-1] = listToSend[currDate.getMonth()-1]+ request.numberOfHours;
+            }
+        }
+        response.status(200).json(listToSend)
+        
+    }
+
+    function sendNotificationToEmployee(name, email, reason, requestResponse){
+        try{
+
+
+                const text = "Hello "+name+",\n\n"+
+                `You have a new notification regarding your pending request (request has the following reason:  ${reason})\n`+
+                `Your request has been ${requestResponse}.\n`+
+                "Please don't respond to this email as this is a non-reply email account.\n\n"+
+                "Thank you!\n"+
+                "Emurali Erdin-Alexandru";
+
+                sendEmailTo(text, email,"Notification regarding request")
+  
+        } catch(error){
+            response.status(500).json(error);
+        }
     }
     
     export {
@@ -504,6 +681,8 @@ function valid(Model, payload){
         getRecord, headRecord, deleteRecord, putRecord, patchRecord, 
         getChildrenOfParent, postChildOfParent,
         getChildOfParent, deleteChildOfParent, putChildOfParent, login,
-        changePassword, createAccountFirstPart, createAccountSecondPart, getRequestsOfDepartment
+        changePassword, createAccountFirstPart, createAccountSecondPart, getRequestsOfDepartment,
+        setRoleOfEmployee, getRoleOfEmployee,forgotPassword, getRequestsOfEmployee, getFreeHoursOfYear,
+        sendNotificationToEmployee
     }
     
