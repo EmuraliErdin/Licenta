@@ -1,5 +1,5 @@
 import express, { request, response } from 'express';
-import { Employee, Request, Departament, Access, Issue, TemporaryCode, Log, Experience} from './repository.mjs';
+import { Employee, Request, Departament, Access, Issue, TemporaryCode, Log, Item, Prize} from './repository.mjs';
 import {
     getRecords, postRecord, deleteRecords,
     getRecord, headRecord, deleteRecord, putRecord, patchRecord, 
@@ -35,7 +35,13 @@ router.route('/requests')
     .put((request, response)=> putRecord(Request, request, response))
     .patch((request, response)=> patchRecord(Request, request, response))
     .delete((request, response)=> deleteRecord(Request, request, response))
-
+    
+ router.route('/requests/:id')
+    .get((request, response)=> getRecord(Request, request, response))
+    .head((request, response)=> headRecord(Request, request, response))//verifica daca exista
+    .put((request, response)=> putRecord(Request, request, response))
+    .patch((request, response)=> patchRecord(Request, request, response))
+    .delete((request, response)=> deleteRecord(Request, request, response))
 
     router.route('/departments')
     .get((request, response)=> getRecords(Departament, request, response))
@@ -48,11 +54,6 @@ router.route('/requests')
     .put((request, response)=> putRecord(Departament, request, response))
     .patch((request, response)=> patchRecord(Departament, request, response))
     .delete((request, response)=> deleteRecord(Departament, request, response))
-
-    router.route('/experiences')
-    .get((request, response)=> getRecords(Experience, request, response))
-    .post((request, response)=> postRecord(Experience, request, response))
-    .delete((request, response)=> deleteRecords(Experience, request, response))
 
     router.route('/logs')
     .get((request, response)=> getRecords(Log, request, response))
@@ -92,13 +93,22 @@ router.route('/requests')
     .get((request,response)=>getRecords(TemporaryCode,request,response))
     .delete((request,response)=>deleteRecords(TemporaryCode,request,response))
 
+    router.route('/prizes')
+    .get((request, response)=> getRecords(Prize, request, response))
+    .post((request, response)=> postRecord(Prize, request, response))
+
+    router.route('/prizes/:id')
+    .put((request, response)=> putRecord(Prize, request, response))
+    .patch((request, response)=> patchRecord(Prize, request, response))
+    .delete((request, response)=> deleteRecord(Prize, request, response))
+
+    router.route('/employees/:fid/items')
+    .get((request,response)=>getChildrenOfParent(Employee, 'item',request,response))
+    .post((request,response)=>postChildOfParent(Employee,'employee',Item,request,response))
+
    router.route('/employees/:fid/requests')
    .get((request,response)=>getRequestsOfEmployee(request,response))
    .post((request,response)=>postChildOfParent(Employee,'employee',Request,request,response))
-
-   router.route('/employees/:fid/experiences')
-   .get((request,response)=>getChildrenOfParent(Employee,'experience',request,response))
-   .post((request,response)=>postChildOfParent(Employee,'employee',Experience,request,response))
 
    router.route('/employees/:fid/logs')
    .get((request,response)=>getChildrenOfParent(Employee,'log',request,response))
@@ -107,10 +117,6 @@ router.route('/requests')
    router.route('/employees/:fid/roles')
    .get((request,response)=>getRoleOfEmployee(request,response))
    .post((request,response)=>postChildOfParent(Employee,'employee',Request,request,response))
-
-   router.route('/departments/:fid/employees/:sid')
-   .get((request,response)=>getChildrenOfParent(Jury,'student',request,response))
-   .post((request,response)=>postChildOfParent(Jury,'jury',Student,request,response))
 
    router.route('/departments/:id/requests')
    .get((request,response)=>getRequestsOfDepartment(request,response))

@@ -1,9 +1,10 @@
 import Sequelize from "sequelize";
 import generator from "generate-password"
-import {Employee, Departament, Request, Access, TemporaryCode, Log, Experience} from "./repository.mjs"
+import { Op } from "sequelize"
+import {Employee, Departament, Request, Access, TemporaryCode, Log, Prize, Item} from "./repository.mjs"
 import {sendEmailTo, sortByDate, formatDate} from './utils.mjs'
 
-function valid(Model, payload){
+    function valid(Model, payload){
     console.warn(Object);
     return Object.entries(Model.tableAttributes).reduce((valid, [name, field])=>{
     if (valid
@@ -37,9 +38,6 @@ function valid(Model, payload){
         }
     }
     
-    //getRecords, postRecord, deleteRecords,
-    //getRecord, headRecord, deleteRecord, putRecord, patchRecord
-    
     async function getRecords(Model, request, response){
         try{
             let records = await Model.findAll({
@@ -62,6 +60,20 @@ function valid(Model, payload){
         try{
            
             if(valid(Model, request.body)) {
+                // if(Model==Employee){
+                //     let department = await Departament.findOne({where:{title:request.body.departmentTitle}})
+                //     if(department){
+                //         let employee = request.body;
+                //         employee.departmentId = department.dataValues.id;
+                //         await Employee.create(employee)
+                //         console.log("AAAAAAAAAAAAAAAAAAAAAAAAAA");
+                //         response.status(201).json({message:"Ok"}).send();
+                //         return;
+                //     }else{
+                //         response.status(404).json({message:"Department does not exist"}).send();
+                //         return;
+                //     }
+                // }
                 let record = await Model.create(request.body);
                 response.status(201)
                 .location(`http://${request.headers.host}${request.baseUrl}${request.url}${request.url.endsWith('/')? '' : '/'}${record.id}`).
@@ -143,33 +155,51 @@ function valid(Model, payload){
             response.status(500).json(error);
         }
     }
-    
+
+    async function giveExperience(employee, xp){
+        employee.dataValues.experience += xp
+        console.log(employee.dataValues);
+        if(employee.dataValues.experience>= employee.dataValues.level*100){
+            employee.dataValues.experience = employee.dataValues.experience - employee.dataValues.length*100
+            employee.dataValues.level = employee.dataValues.level + 1
+            giveItem(employee)
+        }
+        await employee.save()
+    }
+
+    async function giveItem(employee){
+        let prizeList = await Prize.findAll({where:{necessaryLevel:{[Op.gte]:employee.dataValues.level}}});
+        for(let i=0;i<prizeList.length;i++){
+            if(prizeList[i].dataValues.necessaryLevel==employee.dataValues.level){
+                let item = {
+                    prizeId: prizeList[i].dataValues.id,
+                    employeeId: employee.dataValues.id,
+                }
+                await Item.create(item);
+            }
+        }
+    }
+
     async function patchRecord(Model, request, response){
         try{
             let record = await Model.findByPk(request.params.id);
             if (record){
                 Object.entries(request.body).forEach(([name, value]) => record[name] = value);
                 await record.save();
+                
                 if(Model==Request){
                     let requestM = record.dataValues
+                    let employee = await Employee.findByPk(requestM.employeeId)
                     if(requestM.status=='ACCEPTED' && requestM.type=='ADD_HOURS'){
                         
-                        const xpM = {
-                            reason:"Request:ADD_HOURS",
-                            createDate : requestM.requestDate,
-                            employeeId: requestM.employeeId,
-                            xp:(requestM.numberOfHours*20)
-                        }
-                        let xpRecord = await Experience.create(xpM);
+                        giveExperience(employee, requestM.numberOfHours*20)
                     }
-                    let employee = await Employee.findByPk(requestM.employeeId)
                     let log = {
                         action:`${requestM.status} request for ${employee.dataValues.firstName}  ${employee.dataValues.lastName}`,
                         createDate:formatDate(new Date()),
                         employeeId: request.body.employeeLogId
                     }
-                    let logM = await Log.create(log)
-                    
+                    await Log.create(log)
                     sendNotificationToEmployee(employee.dataValues.firstName,employee.dataValues.email, requestM.reason, requestM.status)
                 }
                 response.status(204).send();
@@ -200,16 +230,20 @@ function valid(Model, payload){
                         children = await parent.getDepartaments();
                         break;
                         }
-                    case 'access':
+                    case 'access':{
                         children =  await parent.getAccesss();
                         break;
-                    case 'log':
+                        }
+                    case 'log':{
                         children = await parent.getLogs();
                         break;
-                    case 'experience':
-                        children = await parent.getExperiences();
+                        }
+                    case 'item':{
+                        children= await parent.getItems();
                         break;
+                        }
                     }
+                    
     
                 if(children!=='')
                 {
@@ -246,15 +280,18 @@ function valid(Model, payload){
                         children = await parent.getDepartaments();
                         break;
                         }
-                    case 'access':
-                        children =  await parent.getAccesss();
-                        break;
-                    case 'log':
-                        children = await parent.getLogs();
-                        break;
-                    case 'experience':
-                        children = await parent.getExperiences();
-                        break;
+                        case 'access':{
+                            children =  await parent.getAccesss();
+                            break;
+                        }
+                        case 'log':{
+                            children = await parent.getLogs();
+                            break;
+                        }
+                        case 'item':{
+                            children= await parent.getItems();
+                            break;
+                        }
                 }
                 await Child.create(child);
                 response.status(201).json(child);
@@ -291,8 +328,6 @@ function valid(Model, payload){
                     case 'log':
                         children = await parent.getLogs();
                         break;
-                    case 'experience':
-                        children = await parent.getExperiences();
                 }
                 const child = children.shift();
     

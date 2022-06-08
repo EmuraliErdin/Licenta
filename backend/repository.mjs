@@ -1,10 +1,25 @@
-import Sequelize, { UUID } from 'sequelize';
+import Sequelize from 'sequelize';
 import { accesses,requestStatus, problemStatus} from './strings.mjs'
 
 const sequelize = new Sequelize({
     dialect: 'sqlite',
-    storage: './test.db'
+    storage: './licenta.db'
 });
+
+const Departament = sequelize.define('department',{
+    id: {
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
+        primaryKey: true
+    },
+    title:{
+        type:Sequelize.STRING,
+        allowNull:false,
+        unique:true
+    }
+}, {
+    timestamps: false
+  })
 
 const Employee  = sequelize.define('employee', {
     id: {
@@ -37,13 +52,23 @@ const Employee  = sequelize.define('employee', {
             isEmail:true
         }
     },
+    experience:{
+        type:Sequelize.INTEGER,
+        defaultValue: 0
+    },
+    level:{
+        type:Sequelize.INTEGER,
+        defaultValue: 0
+    },
     isManager:{
         type:Sequelize.BOOLEAN,
     },
     departmentId:{
         type:Sequelize.STRING
     }
-});
+},{
+    timestamps: false
+  });
 
 const Issue = sequelize.define('issue',{
     id: {
@@ -71,7 +96,9 @@ const Issue = sequelize.define('issue',{
             isIn:[problemStatus]
         }
     }
-})
+},{
+    timestamps: false
+  })
 
 const TemporaryCode  = sequelize.define('temporaryCode', {
 
@@ -86,7 +113,9 @@ const TemporaryCode  = sequelize.define('temporaryCode', {
         type:Sequelize.INTEGER,
     }
 
-});
+}, {
+    timestamps: false
+  });
 
 const Log  = sequelize.define('log', {
     id: {
@@ -106,7 +135,9 @@ const Log  = sequelize.define('log', {
         type:Sequelize.UUID,
         allowNull:false
     }
-});
+}, {
+    timestamps: false
+  });
 
 const Request = sequelize.define('request',{
     id: {
@@ -147,21 +178,9 @@ const Request = sequelize.define('request',{
     employeeId:{
         type: Sequelize.UUID,
     }
-})
-
-const Departament = sequelize.define('department',{
-    id: {
-        type: Sequelize.UUID,
-        defaultValue: Sequelize.UUIDV4,
-        allowNull: false,
-        primaryKey: true
-    },
-    title:{
-        type:Sequelize.STRING,
-        allowNull:false,
-        unique:true
-    }
-})
+}, {
+    timestamps: false
+  })
 
 const Access = sequelize.define('access',{
     id: {
@@ -193,32 +212,50 @@ const Access = sequelize.define('access',{
         type:Sequelize.STRING,
         allowNull:false
     }
-})
+}, {
+    timestamps: false
+  })
 
-const Experience = sequelize.define('experience',{
+
+  const Prize = sequelize.define('prize',{
     id: {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
         allowNull: false,
         primaryKey: true
     },
-    xp:{
+    name:{
+        type:Sequelize.STRING,
+        allowNull:false
+    },
+    description:{
+        type:Sequelize.STRING,
+    },
+    necessaryLevel:{
         type:Sequelize.INTEGER,
+        defaultValue:0
+    }
+}, {
+    timestamps: false
+  })
+
+  const Item = sequelize.define('item',{
+    id: {
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
+        allowNull: false,
+        primaryKey: true
+    },
+    prizeId:{
+        type:Sequelize.UUID,
     },
     employeeId:{
-        type:Sequelize.UUID,
-        allowNull:false
-        
-    },
-    reason:{
-        type:Sequelize.STRING,
-        allowNull:false
-    },
-    createDate:{
-        type:Sequelize.STRING,
-        allowNull:false
+        type:Sequelize.UUID
     }
-})
+
+}, {
+    timestamps: false
+  })
 
 Employee.hasMany(Request, {
     foreignKey: 'employeeId'
@@ -228,16 +265,12 @@ Request.belongsTo(Employee, {
     foreignKey: 'employeeId'
 });
 
-Employee.hasMany(Experience, {
-    foreignKey: 'employeeId'
-});
-
-Experience.belongsTo(Employee, {
-    foreignKey: 'employeeId'
-});
-
 Departament.hasMany(Employee, {
     foreignKey:'departmentId'
+})
+
+Employee.belongsTo(Departament, {
+    foreignKey:"departmentId"
 })
 
 Employee.hasMany(Log,{
@@ -248,12 +281,26 @@ Log.belongsTo(Employee,{
     foreignKey: 'employeeId'
 })
 
+Employee.hasMany(Item,{
+    foreignKey:'employeeId'
+})
+
+Item.belongsTo(Employee,{
+    foreignKey:'employeeId'
+})
+
+Prize.hasMany(Item,{
+    foreignKey:'prizeId'
+})
+
+Item.belongsTo(Prize,{
+    foreignKey:'prizeId'
+})
 
 async function initialize() {
     await sequelize.authenticate();
     await sequelize.sync({
-        alter: true,
-        //force:true
+        //force: true
     });
 }
 
@@ -266,5 +313,6 @@ export {
     Issue,
     TemporaryCode,
     Log,
-    Experience
+    Prize,
+    Item
 }
