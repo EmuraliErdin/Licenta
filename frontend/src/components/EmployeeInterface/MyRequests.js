@@ -60,10 +60,24 @@ function MyRequests() {
     }
 
     const updateRequest = async (oldValue, newValue)=> {
-
-        let reqDate = formatDate(newValue.requestDate)
-        let status = oldValue.status.toUpperCase()
         
+        let reqDate = oldValue.requestDate
+        console.log(newValue.requestDate);
+        if(newValue.reqDate!=undefined){
+             formatDate(newValue.requestDate)
+        }
+        
+        let status = oldValue.status.toUpperCase()
+        let obj ={
+            id:oldValue.id,
+            requestDate:reqDate,
+            createDate:newValue.createDate,
+            reason:newValue.reason,
+            type:newValue.type,
+            status:status,
+            numberOfHours:newValue.numberOfHours
+        }
+        console.log(obj);
         try {
             const response = await fetch(`/api/requests/${oldValue.id}`, {
                 method: 'PUT',

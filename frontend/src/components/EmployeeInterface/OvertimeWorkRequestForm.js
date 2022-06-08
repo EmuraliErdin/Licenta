@@ -35,21 +35,6 @@ function OvertimeWorkRequestForm() {
                     type:"ADD_HOURS"
                 }),
             });
-            
-            const xp = 20*parseInt(numberOfHours);
-            const responseExperience = await fetch('/api/experiences', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    reason:"Request:ADD_HOURS",
-                    numberOfHours:parseInt(numberOfHours),
-                    createDate : formatDate(date),
-                    employeeId: userStore.employee.id,
-                    xp:xp
-                }),
-            });
 
             if(responseRequest.status==201){
                 showToast("The request was sent successfully!","201 created","success")

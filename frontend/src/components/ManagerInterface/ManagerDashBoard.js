@@ -70,9 +70,18 @@ function ManagerDashBoard() {
                 </div>
 
                 <div id='manager-requests-section'>
-                  <div class='btn-manager'></div>
-                  <div class='btn-manager'></div>
-                  <div class='btn-manager'></div>
+                  <div class='btn-manager'>
+                    <h3>Salut</h3>
+                    <h4 id='access-this-page'>Access this page</h4>
+                  </div>
+                  <div class='btn-manager'>
+                    <h3>Salut</h3>
+                    <h4 id='access-this-page'>Access this page</h4>
+                  </div>
+                  <div class='btn-manager'>
+                    <h3>Salut</h3>
+                    <h4 id='access-this-page'>Access this page</h4>
+                  </div>
                 </div>
             </div>
         </div>

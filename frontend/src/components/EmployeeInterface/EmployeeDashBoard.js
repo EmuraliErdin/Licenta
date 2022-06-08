@@ -15,42 +15,8 @@ function EmployeeDashBoard() {
     },[]);
 
     const getExperience = async()=>{
-      const responseExperience = await fetch(`/api/employees/${userStore.employee.id}/experiences`)
-      const experienceList = await responseExperience.json()
-      const l=getLevel(experienceList)
-      const p=getProgress(experienceList)
-      setLevel(l)
-      setProgress(p)
-
-      const percentage = progress/(level*100)
-    }
-
-    const getLevel = (experienceList) => {
-      let level = 1
-      let xpSum = 0
-      for(let i=0;i<experienceList.length;i++) {
-         xpSum += experienceList[i].xp
-
-         if(xpSum>=level*100) {
-            xpSum = xpSum-level*100
-            level += 1
-         }
-      }
-      return level
-    }
-
-    const getProgress = (experienceList) =>{
-      let level = 1
-      let xpSum = 0
-      for(let i=0;i<experienceList.length;i++) {
-         xpSum += experienceList[i].xp
-         
-         if(xpSum>=level*100) {
-            xpSum = xpSum-level*100
-            level += 1
-         }
-      }
-      return xpSum
+      setLevel(userStore.employee.level)
+      setProgress(userStore.employee.experience)
     }
 
     return (

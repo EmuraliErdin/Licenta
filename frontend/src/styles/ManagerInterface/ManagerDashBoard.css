@@ -96,6 +96,7 @@
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     position: relative;
@@ -103,6 +104,17 @@
     transition: 1s;
   }
 
+  .btn-manager>#access-this-page {
+    visibility:hidden;
+    opacity:0;
+    transition: visibility 0.3s linear,opacity 0.3s linear;
+  }
+
 .btn-manager:hover{
     margin-bottom:50px;
+}
+
+.btn-manager:hover>#access-this-page{
+    visibility:visible;
+    opacity:1;
 }
