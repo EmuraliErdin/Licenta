@@ -58,7 +58,7 @@ function ManagerDashBoard() {
                     <h3>Salut</h3>
                     <h4 id='access-this-page'>Access this page</h4>
                   </div>
-                  <div className='btn-manager'>
+                  <div className='btn-manager' onClick={() => navigate('/employees-requests')} >
                     <h4>You have {""+numberOfPendingRequests} pending requests</h4>
                     <h4 id='access-this-page'>Access this page</h4>
                   </div>

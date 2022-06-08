@@ -688,15 +688,24 @@ import {sendEmailTo, sortByDate, formatDate} from './utils.mjs'
             }
         }
 
-        let listToSend = new Array(12).fill(0);
+        let listToSendEarly = new Array(12).fill(0);
+        let listToSendOvertime = new Array(12).fill(0);
 
         for(let request of requestList){
             let currDate = new Date(request.requestDate)
             if(new Date(currDate).getFullYear()==year){
-                listToSend[currDate.getMonth()-1] = listToSend[currDate.getMonth()-1]+ request.numberOfHours;
+                if(request.type=='ADD_HOURS' && request.status){
+                    listToSendOvertime[currDate.getMonth()] += request.numberOfHours
+                } else {
+                    listToSendEarly[currDate.getMonth()] += request.numberOfHours
+                }
             }
         }
-        response.status(200).json(listToSend)
+        let objToSend = {
+            overtime:listToSendOvertime,
+            earlyLeave:listToSendEarly
+        }
+        response.status(200).json(objToSend)
         
     }
 

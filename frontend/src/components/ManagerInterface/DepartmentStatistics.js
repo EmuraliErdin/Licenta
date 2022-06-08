@@ -19,14 +19,20 @@ function DepartmentStatistics() {
     const getDataForChart = async () =>{
         let currentYear = new Date().getFullYear();
         const responseRequests = await fetch(`/api/getFreeHoursOfYear/${currentYear}/${userStore.employee.departmentId}`)
-        let earlyLeaveHoursPerMonth = await responseRequests.json()
+        let obj = await responseRequests.json()
+        
         setData({
             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July','August','September','October', 'November', 'December'],
             datasets: [
                 {
                     label: 'Ahead of time leave hours',
                     backgroundColor: '#42A5F5',
-                    data: earlyLeaveHoursPerMonth
+                    data: obj.earlyLeave
+                },
+                {
+                    label: 'Overtime hours worked',
+                    backgroundColor: '#f9ac1b',
+                    data: obj.overtime
                 }
             ]
         })
