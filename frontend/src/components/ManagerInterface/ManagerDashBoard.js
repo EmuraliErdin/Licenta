@@ -1,54 +1,38 @@
 import { useState, useEffect, useRef } from 'react';
 import '../../styles/ManagerInterface/ManagerDashBoard.css'
 import userStore from "../../UserStore";
+import {useNavigate} from 'react-router-dom'
 import ManagerNavBar from './ManagerNavBar';
 import { Knob } from 'primereact/knob';
 
 function ManagerDashBoard() {
     const [level, setLevel] = useState(1)
     const [progress, setProgress] = useState(0)
+    const [numberOfPendingRequests, setNumberOfPendingRequests] = useState(0)
+    const navigate = useNavigate()
 
     useEffect(() => {
       getExperience()
+      getNumberOfPendingRequests()
+      console.log(numberOfPendingRequests);
+
     },[]);
 
-    const getExperience = async()=>{
-      const responseExperience = await fetch(`/api/managers/${userStore.manager.id}/experiences`)
-      const experienceList = await responseExperience.json()
-      const l=getLevel(experienceList)
-      const p=getProgress(experienceList)
-      setLevel(l)
-      setProgress(p)
+    const getNumberOfPendingRequests = async () =>{
+      try{
+        const responseNumber = await fetch(`/api/numberOfRequestsPerDepartment/${userStore.employee.departmentId}`)
+        const number = await responseNumber.json();
+        setNumberOfPendingRequests(number.numberOfRequests)
+      } catch (err) {
+        console.warn(err);
+    }
+        
 
-      const percentage = progress/(level*100)
     }
 
-    const getLevel = (experienceList) => {
-      let level = 1
-      let xpSum = 0
-      for(let i=0;i<experienceList.length;i++) {
-         xpSum += experienceList[i].xp
-
-         if(xpSum>=level*100) {
-            xpSum = xpSum-level*100
-            level += 1
-         }
-      }
-      return level
-    }
-
-    const getProgress = (experienceList) =>{
-      let level = 1
-      let xpSum = 0
-      for(let i=0;i<experienceList.length;i++) {
-         xpSum += experienceList[i].xp
-         
-         if(xpSum>=level*100) {
-            xpSum = xpSum-level*100
-            level += 1
-         }
-      }
-      return xpSum
+    const getExperience = async () => {
+      setLevel(userStore.employee.level+1)
+      setProgress(userStore.employee.experience)
     }
 
     return (
@@ -70,16 +54,16 @@ function ManagerDashBoard() {
                 </div>
 
                 <div id='manager-requests-section'>
-                  <div class='btn-manager'>
+                  <div className='btn-manager'>
                     <h3>Salut</h3>
                     <h4 id='access-this-page'>Access this page</h4>
                   </div>
-                  <div class='btn-manager'>
-                    <h3>Salut</h3>
+                  <div className='btn-manager'>
+                    <h4>You have {""+numberOfPendingRequests} pending requests</h4>
                     <h4 id='access-this-page'>Access this page</h4>
                   </div>
-                  <div class='btn-manager'>
-                    <h3>Salut</h3>
+                  <div className='btn-manager' onClick={() => navigate('/report-a-problem')}>
+                    <h4>Saw a problem? Report it!</h4>
                     <h4 id='access-this-page'>Access this page</h4>
                   </div>
                 </div>

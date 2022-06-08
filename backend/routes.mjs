@@ -6,7 +6,7 @@ import {
     getChildrenOfParent, postChildOfParent, getRequestsOfEmployee, 
     getChildOfParent, deleteChildOfParent, putChildOfParent, login, changePassword,
     createAccountFirstPart, createAccountSecondPart, getRequestsOfDepartment, setRoleOfEmployee, getRoleOfEmployee, forgotPassword,
-    getFreeHoursOfYear, sendNotificationToEmployee
+    getFreeHoursOfYear, sendNotificationToEmployee, getNumberOfRequestsOfDepartment
 } from './service.mjs';
 
 const router = express.Router();
@@ -141,5 +141,9 @@ router.route('/requests')
    
    router.route('/notificationRequest')
    .post((request, response)=> sendNotificationToEmployee(request, response))
+
+   router.route('/numberOfRequestsPerDepartment/:id')
+   .get((request, response)=> getNumberOfRequestsOfDepartment(request,response))
+
 
     export default router;

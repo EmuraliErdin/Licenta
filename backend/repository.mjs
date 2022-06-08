@@ -58,7 +58,7 @@ const Employee  = sequelize.define('employee', {
     },
     level:{
         type:Sequelize.INTEGER,
-        defaultValue: 0
+        defaultValue: 1
     },
     isManager:{
         type:Sequelize.BOOLEAN,

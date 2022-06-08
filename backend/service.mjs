@@ -160,11 +160,18 @@ import {sendEmailTo, sortByDate, formatDate} from './utils.mjs'
         employee.dataValues.experience += xp
         console.log(employee.dataValues);
         if(employee.dataValues.experience>= employee.dataValues.level*100){
-            employee.dataValues.experience = employee.dataValues.experience - employee.dataValues.length*100
+            employee.dataValues.experience = employee.dataValues.experience - employee.dataValues.level*100
             employee.dataValues.level = employee.dataValues.level + 1
             giveItem(employee)
         }
-        await employee.save()
+        await Employee.update({
+            level: employee.dataValues.level,
+            experience: employee.dataValues.experience
+        },
+        {
+            where:{ id: employee.dataValues.id}
+        })
+        // await employee.update(request.body)
     }
 
     async function giveItem(employee){
@@ -711,6 +718,35 @@ import {sendEmailTo, sortByDate, formatDate} from './utils.mjs'
         }
     }
     
+    async function getNumberOfRequestsOfDepartment(request, response) {
+        try{
+            let department = await Departament.findByPk(request.params.id);
+
+            if(department){
+                let employees = await Employee.findAll({where:{departmentId:request.params.id}});
+                let counter = 0;
+                for(let i=0;i<employees.length;i++){
+                    let requestsOfEmployee = await Request.findAll({where:{employeeId:employees[i].dataValues.id}});
+                    for(let j=0;j<requestsOfEmployee.length;j++){
+                        if(requestsOfEmployee[j].dataValues.status=="PENDING"){
+                            counter++;
+                        }
+                    }
+                }
+                
+                response.status(200).send({numberOfRequests:counter});
+            }
+            else{
+                response.status(404).json({message:"Department not found"});
+            }
+
+
+        }catch(error){
+            console.warn(error);
+            response.status(500).json(error);
+        }
+    }
+
     export {
         getRecords, postRecord, deleteRecords,
         getRecord, headRecord, deleteRecord, putRecord, patchRecord, 
@@ -718,6 +754,6 @@ import {sendEmailTo, sortByDate, formatDate} from './utils.mjs'
         getChildOfParent, deleteChildOfParent, putChildOfParent, login,
         changePassword, createAccountFirstPart, createAccountSecondPart, getRequestsOfDepartment,
         setRoleOfEmployee, getRoleOfEmployee,forgotPassword, getRequestsOfEmployee, getFreeHoursOfYear,
-        sendNotificationToEmployee
+        sendNotificationToEmployee, getNumberOfRequestsOfDepartment
     }
     
