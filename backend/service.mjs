@@ -694,7 +694,7 @@ import {sendEmailTo, sortByDate, formatDate} from './utils.mjs'
         for(let request of requestList){
             let currDate = new Date(request.requestDate)
             if(new Date(currDate).getFullYear()==year){
-                if(request.type=='ADD_HOURS' && request.status){
+                if(request.type=='ADD_HOURS' && request.status ){
                     listToSendOvertime[currDate.getMonth()] += request.numberOfHours
                 } else {
                     listToSendEarly[currDate.getMonth()] += request.numberOfHours
@@ -756,6 +756,27 @@ import {sendEmailTo, sortByDate, formatDate} from './utils.mjs'
         }
     }
 
+    async function getItemsOfEmployee(request, response){
+        try {
+            const employee = await Employee.findByPk(request.params.id)
+            if(employee){
+                const items = await Item.findAll({where:{employeeId:request.params.id}})
+                const listToSend = []
+                for(let i = 0; i<items.length;i++) {
+                    let prize = await Prize.findByPk(items[i].dataValues.prizeId)
+                    listToSend.push(prize.dataValues)
+                }
+                response.status(200).json(listToSend)
+            } else {
+                response.status(404).json({message:"Employee not found"})
+            }
+
+
+        } catch(error) {
+            response.status(500).json(error);
+        }
+    }
+
     export {
         getRecords, postRecord, deleteRecords,
         getRecord, headRecord, deleteRecord, putRecord, patchRecord, 
@@ -763,6 +784,6 @@ import {sendEmailTo, sortByDate, formatDate} from './utils.mjs'
         getChildOfParent, deleteChildOfParent, putChildOfParent, login,
         changePassword, createAccountFirstPart, createAccountSecondPart, getRequestsOfDepartment,
         setRoleOfEmployee, getRoleOfEmployee,forgotPassword, getRequestsOfEmployee, getFreeHoursOfYear,
-        sendNotificationToEmployee, getNumberOfRequestsOfDepartment
+        sendNotificationToEmployee, getNumberOfRequestsOfDepartment, getItemsOfEmployee
     }
     

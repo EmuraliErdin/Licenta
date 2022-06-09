@@ -6,7 +6,7 @@ import {
     getChildrenOfParent, postChildOfParent, getRequestsOfEmployee, 
     getChildOfParent, deleteChildOfParent, putChildOfParent, login, changePassword,
     createAccountFirstPart, createAccountSecondPart, getRequestsOfDepartment, setRoleOfEmployee, getRoleOfEmployee, forgotPassword,
-    getFreeHoursOfYear, sendNotificationToEmployee, getNumberOfRequestsOfDepartment
+    getFreeHoursOfYear, sendNotificationToEmployee, getNumberOfRequestsOfDepartment, getItemsOfEmployee
 } from './service.mjs';
 
 const router = express.Router();
@@ -102,8 +102,8 @@ router.route('/requests')
     .patch((request, response)=> patchRecord(Prize, request, response))
     .delete((request, response)=> deleteRecord(Prize, request, response))
 
-    router.route('/employees/:fid/items')
-    .get((request,response)=>getChildrenOfParent(Employee, 'item',request,response))
+    router.route('/employees/:id/items')
+    .get((request,response)=>getItemsOfEmployee(request,response))
     .post((request,response)=>postChildOfParent(Employee,'employee',Item,request,response))
 
    router.route('/employees/:fid/requests')
