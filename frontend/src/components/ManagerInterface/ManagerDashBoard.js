@@ -32,14 +32,14 @@ function ManagerDashBoard() {
     }
 
     const getExperience = async () => {
-      setLevel(userStore.employee.level+1)
+      setLevel(userStore.employee.level)
       setProgress(userStore.employee.experience)
     }
 
     return (
         <div id="manager-dashboard-container-flex">
           <ManagerNavBar id='manager-dashboard-menu'/>
-            <div id="manager-dashboard-container-grid">
+            <div className="fadein animation-duration-1000" id="manager-dashboard-container-grid">
                 
                 <div id='manager-header-dashboard'>
                   <h1>Homepage</h1>
@@ -54,9 +54,9 @@ function ManagerDashBoard() {
                   </div>
                 </div>
 
-                <div id='manager-requests-section'>
-                  <div className='btn-manager'>
-                    <h3>Salut</h3>
+                <div id='manager-requests-section' >
+                <div className='btn-manager' onClick={() => navigate('/employee-inventory')}>
+                    <h3>See your inventory</h3>
                     <h4 id='access-this-page'>Access this page</h4>
                   </div>
                   <div className='btn-manager' onClick={() => navigate('/employees-requests')} >

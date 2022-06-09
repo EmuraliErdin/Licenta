@@ -145,5 +145,4 @@ router.route('/requests')
    router.route('/numberOfRequestsPerDepartment/:id')
    .get((request, response)=> getNumberOfRequestsOfDepartment(request,response))
 
-
     export default router;

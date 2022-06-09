@@ -11,8 +11,8 @@ import '../styles/LogInForm.css'
 import userStore from "../UserStore";
 
 function LogInForm() {
-    const [password,setPassowrd] = useState("1456");
-    const [email,setEmail] = useState("Chirila.Jasmine@profi.com");
+    const [password,setPassowrd] = useState("");
+    const [email,setEmail] = useState("");
     const [isLoading,setIsLoading]=useState();
     const [forgotPasswordVisible, setForgotPasswordVisible] = useState(false)
     const [forgotPasswordEmail, setForgotPasswordEmail] = useState('')
@@ -116,7 +116,7 @@ function LogInForm() {
                 </span>
             </Dialog>
 
-            <div className="login-container">
+        <div  className="login-container fadein animation-duration-1000">
                 <Toast ref={toast} position='top-right' />
                 <InputText id = "login-email" placeholder = "Account name" value = {email} onChange = {(e) => setEmail(e.target.value)} /> 
                 <Password id = "login-pass" placeholder = "Password" value = {password} onChange = {(e) => setPassowrd(e.target.value)} toggleMask feedback={false}/> 

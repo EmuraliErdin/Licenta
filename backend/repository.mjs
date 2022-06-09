@@ -42,6 +42,7 @@ const Employee  = sequelize.define('employee', {
     },
     password:{
         type:Sequelize.STRING,
+        allowNull:false,
         validate:{
             min:3
         }

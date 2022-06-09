@@ -49,7 +49,7 @@ function DepartmentStatistics() {
 
 
     return (
-        <div id='department-statistics-container-flex'>     
+        <div className="fadein animation-duration-1000" id='department-statistics-container-flex'>     
             {getNavBar()}
             <div id='department-statistics-container-grid'>
                 <h3 id='chart-header'>This chart shows how many hours the employees work by month</h3>

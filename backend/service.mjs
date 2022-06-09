@@ -1,5 +1,6 @@
 import Sequelize from "sequelize";
 import generator from "generate-password"
+import bcrypt  from 'bcrypt'
 import { Op } from "sequelize"
 import {Employee, Departament, Request, Access, TemporaryCode, Log, Prize, Item} from "./repository.mjs"
 import {sendEmailTo, sortByDate, formatDate} from './utils.mjs'
@@ -157,8 +158,7 @@ import {sendEmailTo, sortByDate, formatDate} from './utils.mjs'
     }
 
     async function giveExperience(employee, xp){
-        employee.dataValues.experience += xp
-        console.log(employee.dataValues);
+        employee.dataValues.experience =  employee.dataValues.experience + xp
         if(employee.dataValues.experience>= employee.dataValues.level*100){
             employee.dataValues.experience = employee.dataValues.experience - employee.dataValues.level*100
             employee.dataValues.level = employee.dataValues.level + 1
@@ -171,7 +171,6 @@ import {sendEmailTo, sortByDate, formatDate} from './utils.mjs'
         {
             where:{ id: employee.dataValues.id}
         })
-        // await employee.update(request.body)
     }
 
     async function giveItem(employee){
@@ -198,9 +197,11 @@ import {sendEmailTo, sortByDate, formatDate} from './utils.mjs'
                     let requestM = record.dataValues
                     let employee = await Employee.findByPk(requestM.employeeId)
                     if(requestM.status=='ACCEPTED' && requestM.type=='ADD_HOURS'){
-                        
                         giveExperience(employee, requestM.numberOfHours*20)
                     }
+                    const employeeLog = await Employee.findByPk(request.body.employeeLogId)
+                    giveExperience(employeeLog, requestM.numberOfHours*5)
+
                     let log = {
                         action:`${requestM.status} request for ${employee.dataValues.firstName}  ${employee.dataValues.lastName}`,
                         createDate:formatDate(new Date()),
@@ -445,11 +446,15 @@ import {sendEmailTo, sortByDate, formatDate} from './utils.mjs'
     
     async function login(request, response) {
         const loginInfo = request.body;
-        const employee  = await Employee.findOne({where:{email:loginInfo.email, password:loginInfo.password}})
-        if(employee)
-        {
-            response.status(200).json(employee);
-        
+        const employee  = await Employee.findOne({where:{email:loginInfo.email}})
+        if(employee) {
+            if(await bcrypt.compare(loginInfo.password, employee.dataValues.password)) {
+                
+                response.status(200).json(employee);
+            } else {
+                response.status(404).json({message:"User and password do not match"});
+            }
+           
         }
         else
         {
@@ -462,10 +467,10 @@ import {sendEmailTo, sortByDate, formatDate} from './utils.mjs'
         try{
             let record = await Employee.findByPk(request.params.id);
             if (record){
-                if(request.body.oldPassword == record.dataValues.password)
+                if(await bcrypt.compare(request.body.oldPassword, record.dataValues.password))
                 {
                     Object.entries(request.body).forEach(([name, value]) => record[name] = value);
-                    record["password"]=request.body.newPassword;
+                    record["password"]=await bcrypt.hash(request.body.newPassword, 10);
                     await record.save();
                     response.status(200).json({message:"Record has been modified!"}).send();
                 }
@@ -534,9 +539,9 @@ import {sendEmailTo, sortByDate, formatDate} from './utils.mjs'
             let record = await TemporaryCode.findByPk(request.body.email);
 
             if(record){
-                
+                record.destroy()
                 if(request.body.code==record.dataValues.code){
-                    
+                    request.body.password = await bcrypt.hash(request.body.password, 10);
                     postRecord(Employee,request,response);
                 }
             }else{
@@ -647,16 +652,16 @@ import {sendEmailTo, sortByDate, formatDate} from './utils.mjs'
 
         try{
             const employee = await Employee.findOne({where: { email:request.body.email}});
-            
             if(employee) {
                 let password = generator.generate({
                     length: 10,
                     numbers: true
                 });
-
-                employee["password"]=password;
+                console.log(employee.dataValues);
+                employee["password"] = await bcrypt.hash(password, 10);
+                console.log(await bcrypt.compare(password, employee.dataValues.password));
                 await employee.save();
-                
+
                 const text = "Hello "+employee.dataValues.firstName+",\n\n"+
                 "Your new password is: "+password+"\n"+
                 "Please change your password from the profile menu as soon as possible.\n"+
@@ -776,6 +781,7 @@ import {sendEmailTo, sortByDate, formatDate} from './utils.mjs'
             response.status(500).json(error);
         }
     }
+
 
     export {
         getRecords, postRecord, deleteRecords,

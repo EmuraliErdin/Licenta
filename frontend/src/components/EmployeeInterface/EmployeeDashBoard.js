@@ -39,12 +39,12 @@ function EmployeeDashBoard() {
                 </div>
 
                 <div id='employee-requests-section'>
-                  <div className='btn-employee'>
-                    <h3>Salut</h3>
+                  <div className='btn-employee' onClick={() => navigate('/employee-inventory')}>
+                    <h3>See your inventory</h3>
                     <h4 id='access-this-page'>Access this page</h4>
                   </div>
-                  <div className='btn-employee' onClick={() => navigate('/employees-requests')} >
-                    <h4>You have  pending requests</h4>
+                  <div className='btn-employee' onClick={() => navigate('/employee-my-requests')} >
+                    <h4>See the state of your requests</h4>
                     <h4 id='access-this-page'>Access this page</h4>
                   </div>
                   <div className='btn-employee' onClick={() => navigate('/report-a-problem')}>

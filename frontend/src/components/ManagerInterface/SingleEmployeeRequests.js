@@ -59,8 +59,7 @@ function EmployeesRequests() {
         updateRequest('REFUSED', e.id)
     }
 
-    const updateRequest = async (status, requestId)=> {
-        
+    const updateRequest = async (status, requestId)=> { 
         try {
             const response = await fetch(`/api/requests/${requestId}`, {
                 method: 'PATCH',
@@ -68,7 +67,8 @@ function EmployeesRequests() {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    status:status
+                    status:status,
+                    employeeLogId: userStore.employee.id
                 })
             })
 
