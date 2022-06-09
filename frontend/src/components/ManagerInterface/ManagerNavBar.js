@@ -5,11 +5,12 @@ import { Button } from 'primereact/button';
 import { Menubar } from 'primereact/menubar';
 import '../../styles/EmployeeInterface/EmployeeDashBoard.css'
 import userStore from '../../UserStore'
+import {getEmployeeFromSession} from '../../functions'
 
 function ManagerNavBar() {
 
    const navigate = useNavigate()
-   let newTab = {}
+
    const [menuItems, setMenuItems] = useState([
         {
            label:'Home',
@@ -46,6 +47,11 @@ function ManagerNavBar() {
            label:'Report a problem',
            icon:'pi pi-fw pi-bolt',
            command: () => navigate('/report-a-problem')
+        },
+        {
+          label:'Inventory',
+          icon:'pi pi-fw pi-box',
+          command: () => navigate('/employee-inventory')
         }
 
      ])

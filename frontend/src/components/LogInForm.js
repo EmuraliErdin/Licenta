@@ -43,6 +43,8 @@ function LogInForm() {
             userStore.employee=person;
             userStore.isLogged=true;
 
+            window.sessionStorage.setItem('employeeId',userStore.employee.id)
+            
             if(person.isManager===false){
                 navigate('/employee-dashboard');
             }

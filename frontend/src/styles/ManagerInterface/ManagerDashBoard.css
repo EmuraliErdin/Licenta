@@ -29,7 +29,6 @@
 
 #manager-dashboard-container-flex > #manager-dashboard-container-grid:hover{
     color:#ff6600;
-    background-color: #f5f5dc;
 }
 
 #manager-menu{
@@ -54,10 +53,6 @@
     width: 100%;
 }
 
-#manager-experience-section:hover{
-  color:#a0d6b4;
-}
-
 #manager-header-dashboard{
     align-items: center;
     grid-column: 1/4;
@@ -70,10 +65,6 @@
     align-content: center;
     justify-content: center;
     flex-direction: column;
-}
-
-#manager-header-dashboard:hover{
-    color:#a0d6b4;
 }
 
 #manager-requests-section{

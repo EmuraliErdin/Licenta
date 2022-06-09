@@ -1,5 +1,6 @@
 
-import { useState, useEffect,useRef } from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../../styles/EmployeeInterface/EmployeeDashBoard.css'
 import EmployeeNavBar from './EmployeeNavBar'
 import userStore from "../../UserStore";
@@ -8,7 +9,7 @@ import { Knob } from 'primereact/knob';
 function EmployeeDashBoard() {
     const [level, setLevel] = useState(1)
     const [progress, setProgress] = useState(0)
-
+    const navigate = useNavigate()
 
     useEffect(() => {
       getExperience()
@@ -38,9 +39,18 @@ function EmployeeDashBoard() {
                 </div>
 
                 <div id='employee-requests-section'>
-                  <div class='btn-employee'></div>
-                  <div class='btn-employee'></div>
-                  <div class='btn-employee'></div>
+                  <div className='btn-employee'>
+                    <h3>Salut</h3>
+                    <h4 id='access-this-page'>Access this page</h4>
+                  </div>
+                  <div className='btn-employee' onClick={() => navigate('/employees-requests')} >
+                    <h4>You have  pending requests</h4>
+                    <h4 id='access-this-page'>Access this page</h4>
+                  </div>
+                  <div className='btn-employee' onClick={() => navigate('/report-a-problem')}>
+                    <h4>Saw a problem? Report it!</h4>
+                    <h4 id='access-this-page'>Access this page</h4>
+                  </div>
                 </div>
             </div>
         </div>

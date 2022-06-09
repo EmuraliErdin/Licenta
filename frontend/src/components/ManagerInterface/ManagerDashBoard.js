@@ -4,6 +4,7 @@ import userStore from "../../UserStore";
 import {useNavigate} from 'react-router-dom'
 import ManagerNavBar from './ManagerNavBar';
 import { Knob } from 'primereact/knob';
+import {getEmployeeFromSession} from '../../functions'
 
 function ManagerDashBoard() {
     const [level, setLevel] = useState(1)
@@ -14,7 +15,7 @@ function ManagerDashBoard() {
     useEffect(() => {
       getExperience()
       getNumberOfPendingRequests()
-      console.log(numberOfPendingRequests);
+
 
     },[]);
 

@@ -41,7 +41,17 @@ function EmployeeNavBar() {
            label:'My requests',
            icon:'pi pi-fw pi-folder',
            command: () => navigate('/employee-my-requests')
-        }
+        },
+        {
+         label:'Inventory',
+         icon:'pi pi-fw pi-box',
+         command: () => navigate('/employee-inventory')
+      },
+      {
+         label:'Report a problem',
+         icon:'pi pi-fw pi-bolt',
+         command: () => navigate('/report-a-problem')
+      }
      ])
 
      useEffect(()=>{
@@ -83,6 +93,11 @@ function EmployeeNavBar() {
                         label:'My requests',
                         icon:'pi pi-fw pi-folder',
                         command: () => navigate('/employee-my-requests')
+                     },
+                     {
+                        label:'Inventory',
+                        icon:'pi pi-fw pi-box',
+                        command: () => navigate('/employee-inventory')
                      },
                      {
                         label:'Employees requests',
