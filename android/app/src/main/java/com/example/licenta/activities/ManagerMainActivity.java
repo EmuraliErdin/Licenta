@@ -22,8 +22,6 @@ import com.example.licenta.activities.fragments.ReportAProblemFragment;
 import com.example.licenta.activities.fragments.manager.EmployeeListFragment;
 import com.example.licenta.activities.fragments.manager.EmployeeRequestsFragment;
 import com.example.licenta.classes.Employee;
-import com.example.licenta.classes.Experience;
-import com.example.licenta.classes.converters.ExperienceJsonConverter;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.List;
@@ -98,7 +96,11 @@ public class ManagerMainActivity extends AppCompatActivity {
 
         tvName.setText("Hello "+employee.getFirstName()+" "+employee.getLastName()+"!");
 
-        getXP();
+        Integer level = employee.getLevel();
+        pbLevel.setMax(level*100);
+        Integer progress = employee.getExperience();
+        pbLevel.setProgress(progress);
+        tvLevel.setText(level.toString());
 
     }
 
@@ -117,26 +119,4 @@ public class ManagerMainActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.fragment_container_manager,fragment);
         fragmentTransaction.commit();
     }
-
-    private void getXP() {
-        String url = getString(R.string.url)+"employees/"+employee.getId()+"/experiences";
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null,
-                response -> {
-                    List<Experience> experienceList = ExperienceJsonConverter.convertListFromJson(response);
-                    Integer level = Experience.getLevel(experienceList);
-                    pbLevel.setMax(level*100);
-                    Integer progress = Experience.getProgress(experienceList);
-                    pbLevel.setProgress(progress);
-                    tvLevel.setText(level.toString());
-                },
-                error -> {
-                    tvLevel.setText(1+"");
-                    pbLevel.setProgress(0);
-                });
-        Volley.newRequestQueue(getApplicationContext()).add(jsonArrayRequest);
-
-    }
-
-
-
 }

@@ -3,8 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/beige"
     android:layout_height="match_parent"
-    tools:context=".activities.MainActivity">
+    tools:context=".activities.MainActivity"
+    >
 
     <EditText
         android:id="@+id/edtPasswordCreateAccount"
@@ -12,11 +14,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:textColor="@color/darkgreen"
+        android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="@+id/edtUserName"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="@+id/edtUserName"
         app:layout_constraintTop_toBottomOf="@+id/tvPassword" />
+
 
     <TextView
         android:id="@+id/tvPassword"
@@ -24,6 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="@string/password"
+        android:textColor="@color/orange"
         app:layout_constraintEnd_toEndOf="@+id/edtUserName"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="@+id/edtUserName"
@@ -35,6 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="150dp"
         android:text="@string/username"
+        android:textColor="@color/orange"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -45,6 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:ems="10"
+        android:textColor="@color/darkgreen"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="@+id/tvUserName"
         app:layout_constraintHorizontal_bias="0.497"
@@ -58,6 +65,7 @@
         android:layout_marginTop="24dp"
         android:text="@string/forgot_password"
         android:clickable="true"
+        android:textColor="@color/orange"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.575"
         app:layout_constraintStart_toStartOf="@+id/edtPasswordCreateAccount"
@@ -69,6 +77,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="@string/authenticate"
+        android:textColor="@color/lightgrey"
+        android:backgroundTint="@color/orange"
         app:layout_constraintEnd_toEndOf="@+id/edtPasswordCreateAccount"
         app:layout_constraintStart_toStartOf="@+id/edtPasswordCreateAccount"
         app:layout_constraintTop_toBottomOf="@+id/tvForgotPassword" />
@@ -80,9 +90,12 @@
         android:layout_marginTop="24dp"
         android:text="@string/create_account"
         android:clickable="true"
+        android:textColor="@color/orange"
         app:layout_constraintEnd_toEndOf="@+id/edtPasswordCreateAccount"
         app:layout_constraintHorizontal_bias="0.405"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edtPasswordCreateAccount" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

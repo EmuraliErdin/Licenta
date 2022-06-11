@@ -47,8 +47,6 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.Employ
         return employeeList.size();
     }
 
-
-
     class EmployeeViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener {
         TextView tvName;
         TextView tvEmail;

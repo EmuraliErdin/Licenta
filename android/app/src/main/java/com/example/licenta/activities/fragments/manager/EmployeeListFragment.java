@@ -79,7 +79,6 @@ public class EmployeeListFragment extends Fragment implements EmployeeAdapter.On
 
     @Override
     public void onEmployeeClick(int position) {
-
         AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
         dialog.setTitle("Action");
         String[] options;

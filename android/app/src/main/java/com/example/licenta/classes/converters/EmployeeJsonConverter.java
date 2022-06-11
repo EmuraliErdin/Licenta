@@ -21,6 +21,8 @@ public class EmployeeJsonConverter {
             jsonObject.put("email",employee.getEmail());
             jsonObject.put("departmentId",employee.getDepartmentId());
             jsonObject.put("isManager",employee.isManager());
+            jsonObject.put("level", employee.getLevel());
+            jsonObject.put("experience", employee.getExperience());
             return jsonObject;
         } catch (JSONException e) {
             e.printStackTrace();
@@ -43,6 +45,8 @@ public class EmployeeJsonConverter {
             employee.setEmail(jsonObject.getString("email"));
             employee.setDepartmentId(jsonObject.getString("departmentId"));
             employee.setIsManager(jsonObject.getBoolean("isManager"));
+            employee.setLevel(jsonObject.getInt("level"));
+            employee.setExperience(jsonObject.getInt("experience"));
         } catch (JSONException e) {
             e.printStackTrace();
             return null;

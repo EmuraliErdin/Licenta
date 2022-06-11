@@ -9,6 +9,22 @@
             android:id="@+id/item_make_department"
             android:title="@string/make_department"
             android:icon="@drawable/ic_department"/>
+        <item
+            android:id="@+id/item_create_prize"
+            android:title="@string/create_prize"
+            android:icon="@drawable/ic__pokemon"/>
+        <item
+            android:id="@+id/item_rename_department"
+            android:title="@string/rename_department_item"
+            android:icon="@drawable/ic_construction"/>
+        <item
+            android:id="@+id/item_change_department"
+            android:title="@string/change_department"
+            android:icon="@drawable/ic_change"/>
+        <item
+            android:id="@+id/item_check_issues"
+            android:title="@string/check_issues"
+            android:icon="@drawable/ic_report_problem"/>
 
     </group>
 </menu>

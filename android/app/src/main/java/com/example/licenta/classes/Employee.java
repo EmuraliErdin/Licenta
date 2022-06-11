@@ -10,6 +10,8 @@ public class Employee implements Serializable {
     private String password;
     private boolean isManager;
     private String departmentId;
+    private int level;
+    private int experience;
 
     public Employee() {
 
@@ -104,6 +106,30 @@ public class Employee implements Serializable {
 
     public void setDepartmentId(String departmentId) {
         this.departmentId = departmentId;
+    }
+
+    public void setManager(boolean manager) {
+        isManager = manager;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        if(level>=0) {
+            this.level = level;
+        }
+    }
+
+    public int getExperience() {
+        return experience;
+    }
+
+    public void setExperience(int experience) {
+        if(experience>=0) {
+            this.experience = experience;
+        }
     }
 
     @Override

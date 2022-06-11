@@ -25,18 +25,12 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.licenta.R;
 import com.example.licenta.classes.Employee;
-import com.example.licenta.classes.Experience;
-import com.example.licenta.classes.Log;
 import com.example.licenta.classes.Request;
 import com.example.licenta.classes.adapters.RequestAdapter;
-import com.example.licenta.classes.converters.ExperienceJsonConverter;
-import com.example.licenta.classes.converters.LogJsonConverter;
 import com.example.licenta.classes.converters.RequestJsonConverter;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
-import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;

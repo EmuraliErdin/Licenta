@@ -57,5 +57,21 @@
         <item>READ_WRITE_COLLEAGUES</item>
         <item>READ_COLLEAGUES</item>
     </array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="create_prize">Create a prize for the employees to win</string>
+    <string name="title_of_prize">Prize title</string>
+    <string name="description_of_prize">A short prize description</string>
+    <string name="necessary_level">Necessary level for prize</string>
+    <string name="rename_department">Select the old department\'s name and rename it in the input below</string>
+    <string name="new_department_name">New department name</string>
+    <string name="rename_department_item">Rename a department</string>
+    <string name="home">Home</string>
+    <string name="a_place_where">A place where you can keep track of your working hours</string>
+    <string name="header_change_department">Change an employee\'s department</string>
+    <string name="old_department_of_employee">Select the current department of employee</string>
+    <string name="employee_emails">Chose the employee based on their email</string>
+    <string name="change_department">Change department</string>
+    <string name="check_issues">Check Issues</string>
 
 </resources>

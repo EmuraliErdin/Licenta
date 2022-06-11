@@ -10,7 +10,6 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -19,6 +18,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.licenta.R;
+import com.example.licenta.activities.fragments.HomeFragment;
 import com.example.licenta.activities.fragments.employee.EarlyWorkRequestFragment;
 import com.example.licenta.activities.fragments.employee.MyRequestsFragment;
 import com.example.licenta.activities.fragments.employee.OvertimeWorkRequestFragment;
@@ -26,9 +26,7 @@ import com.example.licenta.activities.fragments.ProfileFragment;
 import com.example.licenta.activities.fragments.ReportAProblemFragment;
 import com.example.licenta.activities.fragments.manager.EmployeeRequestsFragment;
 import com.example.licenta.classes.Employee;
-import com.example.licenta.classes.Experience;
 import com.example.licenta.classes.Role;
-import com.example.licenta.classes.converters.ExperienceJsonConverter;
 import com.example.licenta.classes.converters.RoleJsonConverter;
 import com.google.android.material.navigation.NavigationView;
 
@@ -52,6 +50,7 @@ public class EmployeeMainActivity extends AppCompatActivity {
     MyRequestsFragment myRequestsFragment = new MyRequestsFragment();
     ReportAProblemFragment reportAProblemFragment = new ReportAProblemFragment();
     EmployeeRequestsFragment employeeRequestsFragment = new EmployeeRequestsFragment();
+    HomeFragment homeFragment = new HomeFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,11 +85,12 @@ public class EmployeeMainActivity extends AppCompatActivity {
                     openFragment(reportAProblemFragment);
                     break;
                 }
-                case R.id.item_colleagues_requests:{
+                case R.id.item_colleagues_requests: {
                     openFragment(employeeRequestsFragment);
                     break;
                 }
             }
+            toggle.syncState();
             return true;
         });
     }
@@ -104,6 +104,7 @@ public class EmployeeMainActivity extends AppCompatActivity {
         earlyWorkRequestFragment.setArguments(bundle);
         myRequestsFragment.setArguments(bundle);
         employeeRequestsFragment.setArguments(bundle);
+        homeFragment.setArguments(bundle);
     }
 
     //Initialize the views
@@ -130,12 +131,19 @@ public class EmployeeMainActivity extends AppCompatActivity {
 
         v.setVisible(false);
         checkForRoles();
-        getXP();
+        tvProgress.setText("Experience: "+employee.getExperience()+"/"+employee.getLevel()*100);
+        tvLevel.setText("Current level: "+employee.getLevel());
+
+        pbLevel.setMax(employee.getLevel()*100);
+        Integer progress = employee.getExperience();
+        pbLevel.setProgress(progress);
+        openFragment(homeFragment);
     }
 
     private void openFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_right);
         fragmentTransaction.replace(R.id.fragment_container,fragment);
         fragmentTransaction.commit();
     }
@@ -153,26 +161,6 @@ public class EmployeeMainActivity extends AppCompatActivity {
                 error -> {});
 
         Volley.newRequestQueue(getApplicationContext()).add(jsonObjectRequest);
-    }
-
-    private void getXP() {
-        String url = getString(R.string.url)+"employees/"+employee.getId()+"/experiences";
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null,
-                response -> {
-                    List<Experience> experienceList = ExperienceJsonConverter.convertListFromJson(response);
-                    Integer level = Experience.getLevel(experienceList);
-                    pbLevel.setMax(level*100);
-                    Integer progress = Experience.getProgress(experienceList);
-                    pbLevel.setProgress(progress);
-                    tvProgress.setText("Experience: "+progress+"/"+level*100);
-                    tvLevel.setText("Current level: "+level.toString());
-                },
-                error -> {
-                    tvLevel.setText("Current level: "+ 1);
-                    pbLevel.setProgress(0);
-                });
-        Volley.newRequestQueue(getApplicationContext()).add(jsonArrayRequest);
-
     }
 
 }
