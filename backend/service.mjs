@@ -59,7 +59,7 @@ import {sendEmailTo, sortByDate, formatDate} from './utils.mjs'
     async function postRecord(Model, request, response){
         
         try{
-           
+            console.log(request.body);
             if(valid(Model, request.body)) {
                 // if(Model==Employee){
                 //     let department = await Departament.findOne({where:{title:request.body.departmentTitle}})
@@ -75,6 +75,7 @@ import {sendEmailTo, sortByDate, formatDate} from './utils.mjs'
                 //         return;
                 //     }
                 // }
+                
                 let record = await Model.create(request.body);
                 response.status(201)
                 .location(`http://${request.headers.host}${request.baseUrl}${request.url}${request.url.endsWith('/')? '' : '/'}${record.id}`).

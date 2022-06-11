@@ -18,6 +18,7 @@ import DepartmentMembers from './components/ManagerInterface/DepartmentMembers'
 import DepartmentStatistics from './components/ManagerInterface/DepartmentStatistics';
 import ReportAProblem from './components/ReportAProblem';
 import Inventory from './components/Inventory'
+import AdminDashBoard from './components/AdminInterface/AdminDashBoard';
 
 
 
@@ -38,6 +39,7 @@ root.render(
       <Route  path='/department-statitstics' element={<DepartmentStatistics/>}/>
       <Route  path='/report-a-problem' element={<ReportAProblem/>}/>
       <Route  path='/employee-inventory' element={<Inventory/>}/>
+      <Route  path='/admin-dashboard' element={<AdminDashBoard/>}/>
       
       <Route  path='*' element={<PageNotFound/>}/>
    </Routes>

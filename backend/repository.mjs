@@ -178,85 +178,85 @@ const Request = sequelize.define('request',{
     },
     employeeId:{
         type: Sequelize.UUID,
-    }
+}
 }, {
-    timestamps: false
-  })
+timestamps: false
+})
 
 const Access = sequelize.define('access',{
-    id: {
-        type: Sequelize.UUID,
-        defaultValue: Sequelize.UUIDV4,
-        allowNull: false,
-        primaryKey: true
-    },
-    type:{
-        type:Sequelize.STRING,
-        validate:{
-            isIn:[accesses]
-        }
-    },
-    givenTo:{
-        type:Sequelize.UUID,
-        allowNull:false
-        
-    },
-    from:{
-        type:Sequelize.UUID,
-        allowNull:false
-    },
-    startDate:{
-        type:Sequelize.STRING,
-        allowNull:false
-    },
-    endDate:{
-        type:Sequelize.STRING,
-        allowNull:false
+id: {
+    type: Sequelize.UUID,
+    defaultValue: Sequelize.UUIDV4,
+    allowNull: false,
+    primaryKey: true
+},
+type:{
+    type:Sequelize.STRING,
+    validate:{
+        isIn:[accesses]
     }
+},
+givenTo:{
+    type:Sequelize.UUID,
+    allowNull:false
+    
+},
+from:{
+    type:Sequelize.UUID,
+    allowNull:false
+},
+startDate:{
+    type:Sequelize.STRING,
+    allowNull:false
+},
+endDate:{
+    type:Sequelize.STRING,
+    allowNull:false
+}
 }, {
-    timestamps: false
-  })
+timestamps: false
+})
 
 
-  const Prize = sequelize.define('prize',{
-    id: {
-        type: Sequelize.UUID,
-        defaultValue: Sequelize.UUIDV4,
-        allowNull: false,
-        primaryKey: true
-    },
-    name:{
-        type:Sequelize.STRING,
-        allowNull:false
-    },
-    description:{
-        type:Sequelize.STRING,
-    },
-    necessaryLevel:{
-        type:Sequelize.INTEGER,
-        defaultValue:0
-    }
+const Prize = sequelize.define('prize',{
+id: {
+    type: Sequelize.UUID,
+    defaultValue: Sequelize.UUIDV4,
+    allowNull: false,
+    primaryKey: true
+},
+name:{
+    type:Sequelize.STRING,
+    allowNull:false
+},
+description:{
+    type:Sequelize.STRING,
+},
+necessaryLevel:{
+    type:Sequelize.INTEGER,
+    defaultValue:0
+}
 }, {
-    timestamps: false
-  })
+timestamps: false
+})
 
-  const Item = sequelize.define('item',{
-    id: {
-        type: Sequelize.UUID,
-        defaultValue: Sequelize.UUIDV4,
-        allowNull: false,
-        primaryKey: true
-    },
-    prizeId:{
-        type:Sequelize.UUID,
-    },
-    employeeId:{
-        type:Sequelize.UUID
-    }
+const Item = sequelize.define('item',{
+id: {
+    type: Sequelize.UUID,
+    defaultValue: Sequelize.UUIDV4,
+    allowNull: false,
+    primaryKey: true
+},
+prizeId:{
+    type:Sequelize.UUID,
+},
+employeeId:{
+    type:Sequelize.UUID
+}
 
 }, {
-    timestamps: false
-  })
+timestamps: false
+})
 
 Employee.hasMany(Request, {
     foreignKey: 'employeeId'
