@@ -45,7 +45,7 @@
 }
 
 .prize-item{
-    border: #495057 3px solid;
+    border: #5b5078 3px solid;
     width: 80%;
     height: 80%;
     display: flex;
@@ -58,8 +58,9 @@
 
 .prize-item:hover{
     margin-bottom: 25px;
-    color:#ff6600;
+    color:grey;
     border: #ff6600 5px solid;
+    background-color: #a0d6b4;
     border-radius: 10%;
     
 }

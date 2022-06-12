@@ -19,6 +19,9 @@ import DepartmentStatistics from './components/ManagerInterface/DepartmentStatis
 import ReportAProblem from './components/ReportAProblem';
 import Inventory from './components/Inventory'
 import AdminDashBoard from './components/AdminInterface/AdminDashBoard';
+import CreateDepartment from './components/AdminInterface/CreateDepartment'
+import RenameDepartment from './components/AdminInterface/RenameDepartment'
+import CreatePrize from './components/AdminInterface/CreatePrize'
 
 
 
@@ -40,6 +43,9 @@ root.render(
       <Route  path='/report-a-problem' element={<ReportAProblem/>}/>
       <Route  path='/employee-inventory' element={<Inventory/>}/>
       <Route  path='/admin-dashboard' element={<AdminDashBoard/>}/>
+      <Route  path='/create-department' element={<CreateDepartment/>}/>
+      <Route  path='/rename-department' element={<RenameDepartment/>}/>
+      <Route  path='/create-prize' element={<CreatePrize/>}/>
       
       <Route  path='*' element={<PageNotFound/>}/>
    </Routes>

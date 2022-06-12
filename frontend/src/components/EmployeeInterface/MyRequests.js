@@ -126,9 +126,8 @@ function MyRequests() {
             return <Button icon="pi pi-trash" className="p-button-rounded p-button-danger" aria-label="Cancel" onClick={()=> deleteRequest(e)} />
           }
           else{
-            return <Button icon="pi pi-trash" disabled={true} className="p-button-rounded p-button-danger" aria-label="Cancel" onClick={()=> deleteRequest(e)} />
-          }
-        
+            return <Button icon="pi pi-trash" disabled={true} className="p-button-rounded p-button-danger" aria-label="Cancel" />
+          } 
     }
 
     const deleteRequest = async (e) =>{

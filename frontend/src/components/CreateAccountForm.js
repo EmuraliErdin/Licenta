@@ -130,7 +130,6 @@ function CreateAccountForm() {
 
     return (
         <div id="create-acc-container-grid">
-
             <Dialog id="create-acc-dialog" header="Header" visible={dialog} style={{ width: '50vw' }} footer={renderFooter('dialog')} onHide={() => onHide('dialog')}>
                 <h3 id="create-acc-dialog-text">You received a code in your email. Take that code and input it here please!</h3>
                 <InputText id = "create-acc-dialog-code" placeholder = "4-digit code" value = {code} onChange = {(e) => setCode(e.target.value)} />
@@ -144,7 +143,7 @@ function CreateAccountForm() {
                 <InputText id = "create-acc-email" placeholder = "Email" value = { email} onChange = {(e) => setEmail(e.target.value)} /> 
                 <Password id = "create-acc-pass" placeholder = "Password" value = {password} onChange = {(e) => setPassowrd(e.target.value)} toggleMask feedback={false}/>
                 <div id="create-acc-input-is-manager">
-                    <h3>Are you the manager for the department selected?</h3>
+                    <h3 id = 'is-manager-header'>Are you the manager for the department selected?</h3>
                     <SelectButton id="create-acc-is-manager" value={isManager} options={isManagerResponseItems} onChange={(e) => v(e.value)}></SelectButton>
                 </div>
                 <Dropdown id="create-acc-dropdown" value={selectedDepartment} options={departmentItems} onChange={(e) => setSelectedDepartment(e.value)} placeholder="Select a Department"/>

@@ -59,7 +59,8 @@ import {sendEmailTo, sortByDate, formatDate} from './utils.mjs'
     async function postRecord(Model, request, response){
         
         try{
-            console.log(request.body);
+            console.log(request.body, valid(Model, request.body));
+            
             if(valid(Model, request.body)) {
                 // if(Model==Employee){
                 //     let department = await Departament.findOne({where:{title:request.body.departmentTitle}})
