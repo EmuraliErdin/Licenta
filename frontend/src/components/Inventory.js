@@ -33,7 +33,7 @@ function Inventory() {
     ,[])
 
     const divList = prizes.map((item)=>{
-        return <div className='prize-item'>
+        return <div className="scalein animation-duration-1000 prize-item">
                     <h3>{item.name}</h3>
                     <h3>Description: {item.description}</h3>
                     <h3>Level: {item.necessaryLevel}</h3>
@@ -42,7 +42,7 @@ function Inventory() {
     return (
         <div id="inventory-container-flex">
             {getNavBar()}
-            <div id="inventory-container-grid">
+            <div  id="inventory-container-grid">
                 {/* <h2 id='no-prizes-message'>You don't own any prizes yet</h2> */}
                 
                 {(prizesCounter)? (<h2 id='no-prizes-message'>You don't own any prizes yet</h2>) : (divList)}

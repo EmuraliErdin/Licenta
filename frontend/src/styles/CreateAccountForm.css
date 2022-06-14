@@ -10,6 +10,7 @@
     justify-content: center;
     background-color: #ddd;
 }
+
 .create-acc-container{
     width: 50%;
     height: 65%;
@@ -30,7 +31,7 @@
 .create-acc-container:hover{
     border-radius: 0% 0% 50% 50% / 0% 0% 5% 5% ;
     box-shadow: 10px 10px rgba(0,0,0,.25);
-    background-color: #a0d6b4;
+    background-color: #BACEC1;
       
 }
 
@@ -57,7 +58,6 @@
     grid-row:4/5;
     grid-column: 2/3;
     align-self:end;
-
 }
 
 #create-acc-pass{
@@ -89,6 +89,7 @@
     grid-row:7/8;
     grid-column: 2/3;
 }
+
 #create-acc-btn-submit{
     grid-row:8/9;
     grid-column: 2/3;
@@ -98,6 +99,7 @@
 #create-acc-dialog-text{
     margin:0;
 }
+
 #create-acc-dialog-code{
     align-self: center;
 }
@@ -108,19 +110,24 @@
 }
 
 .create-acc-container:hover>#create-acc-header-text{
-    color:#f5f5dc;
+    color:#F6F4E8;
 }
 
 .create-acc-container:hover>#create-acc-btn-submit{
-    background-color:#f5f5dc;
+    background-color: #1D3124;
+    color:#F6F4E8;
 }
 
 .create-acc-container:hover #is-manager-header{
-    color:#f5f5dc;
+    color:#F6F4E8;
 }
 
 .create-acc-container:hover #create-acc-is-manager .p-button{
+    color:#F6F4E8;
+    background-color: #1D3124;
+}
 
-    color:grey;
-    background-color: #f5f5dc;
+.create-acc-container:hover #create-acc-is-manager .p-highlight{
+    color:#F6F4E8;
+    background-color: #E59560;
 }

@@ -29,7 +29,7 @@
 .login-container:hover{
     border-radius: 0% 0% 50% 50% / 0% 0% 5% 5% ;
     box-shadow: 10px 10px rgba(0,0,0,.25);
-    background-color: #a0d6b4;   
+    background-color: #BACEC1;   
 }
 
 #login-email{
@@ -79,10 +79,11 @@
 
 .login-container:hover #login-create-account, .login-container:hover #login-forgot-password{
     border-radius: 0% 0% 50% 50% / 0% 0% 5% 5% ;
-    color: #f5f5dc;
+    color: #F6F4E8;
 }
 
 .login-container:hover #login-btn-submit{
-    background-color: #f5f5dc;
+    background-color: #1D3124;
+    color: #F6F4E8;
 }
 

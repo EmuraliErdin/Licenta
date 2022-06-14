@@ -3,7 +3,7 @@ import {useNavigate} from 'react-router-dom'
 import { GrLogout } from 'react-icons/gr';
 import { Button } from 'primereact/button';
 import { Menubar } from 'primereact/menubar';
-import '../../styles/EmployeeInterface/EmployeeDashBoard.css'
+import '../../styles/MenuBarStyle.css'
 import userStore from '../../UserStore'
 
 function EmployeeNavBar() {
@@ -120,11 +120,11 @@ function EmployeeNavBar() {
       return userStore.employee.firstName +" "+  userStore.employee.lastName
      }
 
-     const btnLogOff = <Button className="p-button-text" label={getEmployeeName()} type="text" icon="FiLogOut" onClick={() => navigate('/')}>&nbsp;<GrLogout/></Button>;
+     const btnLogOff = <Button className="p-button-text menu-label" label={getEmployeeName()} type="text" icon="FiLogOut" onClick={() => navigate('/')}>&nbsp;<GrLogout/></Button>;
 
     return (
         <>
-            <Menubar id='employee-menu' model={menuItems} end={btnLogOff}/>
+            <Menubar id='employee-menu' className="menu" model={menuItems} end={btnLogOff}/>
         </>
     )
 

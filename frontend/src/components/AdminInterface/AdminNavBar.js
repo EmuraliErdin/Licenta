@@ -3,7 +3,7 @@ import {useNavigate} from 'react-router-dom'
 import { GrLogout } from 'react-icons/gr';
 import { Button } from 'primereact/button';
 import { Menubar } from 'primereact/menubar';
-import '../../styles/EmployeeInterface/EmployeeDashBoard.css'
+import '../../styles/MenuBarStyle.css'
 import userStore from '../../UserStore'
 import {getEmployeeFromSession} from '../../functions'
 
@@ -41,11 +41,11 @@ function AdminNavBar() {
         return "Admin"
      }
 
-     const btnLogOff = <Button className="p-button-text" label={getEmployeeName()} type="text" icon="FiLogOut" onClick={() => navigate('/')}>&nbsp;<GrLogout/></Button>;
+     const btnLogOff = <Button className="p-button-text menu-label" label={getEmployeeName()} type="text" icon="FiLogOut" onClick={() => navigate('/')}>&nbsp;<GrLogout/></Button>;
 
     return (
         <>
-            <Menubar id='admin-menu' model={menuItems} end={btnLogOff}/>
+            <Menubar id='admin-menu' className="menu" model={menuItems} end={btnLogOff}/>
         </>
     )
 

@@ -1,0 +1,13 @@
+.menu{
+    background-color: #F6F4E8;
+    color: #1D3124 !important;
+    font-weight:500;
+}
+
+.p-menubar .p-menubar-root-list > .p-menuitem > .p-menuitem-link .p-menuitem-text{
+    color: #1D3124 !important;
+}
+
+.menu-label{
+    color:#1D3124 !important;
+}
