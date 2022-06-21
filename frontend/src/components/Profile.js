@@ -109,16 +109,16 @@ function Profile() {
         <div id='profile-container-flex'>
             <Toast ref={toast} />
             {getNavBar()}
-            <div id='profile-container-grid'>
+            <div id='profile-container-grid' className='fadein animation-duration-1000'>
             
             <div id='profile-fn-input'>
                 <InputText value={firstName} disabled={fnDisabled} onChange={(e) => setFirstName(e.target.value)} placeholder="First name"/>
                 {(fnDisabled) ? (<span>
-                                    <Button icon="pi pi-pencil" className="p-button-rounded" onClick={(e)=>{onEdit(setFnDisabled)}}/>
+                                    <Button  icon="pi pi-pencil" className="p-button-rounded round scalein animation-duration-500" onClick={(e)=>{onEdit(setFnDisabled)}}/>
                                 </span>) : (
                                 <span>
-                                    <Button icon="pi pi-check" className="p-button-rounded" onClick={(e)=>{onConfirmChange(setFnDisabled, setFirstName)}}/>
-                                    <Button icon="pi pi-times" className="p-button-rounded" onClick={(e)=>{onCancelChangeFn()}}/>
+                                    <Button  icon="pi pi-check" className="p-button-rounded round scalein animation-duration-500" onClick={(e)=>{onConfirmChange(setFnDisabled, setFirstName)}}/>
+                                    <Button  icon="pi pi-times" className="p-button-rounded round scalein animation-duration-500" onClick={(e)=>{onCancelChangeFn()}}/>
                                 </span>
                             )}
                 
@@ -127,23 +127,23 @@ function Profile() {
             <div id='profile-ln-input'>
                 <InputText value={lastName} disabled={lnDisabled} onChange={(e) => setLastName(e.target.value)} placeholder="Last name"/>
                 {(lnDisabled) ? (<span>
-                                    <Button icon="pi pi-pencil" className="p-button-rounded" onClick={(e)=>{onEdit(setLnDisabled)}}/>
+                                    <Button  icon="pi pi-pencil" className="p-button-rounded round scalein animation-duration-500" onClick={(e)=>{onEdit(setLnDisabled)}}/>
                                 </span>) : (
                                 <span>
-                                    <Button icon="pi pi-check" className="p-button-rounded" onClick={(e)=>{onConfirmChange(setLnDisabled, setLastName)}}/>
-                                    <Button icon="pi pi-times" className="p-button-rounded" onClick={(e)=>{onCancelChangeLn()}}/>
+                                    <Button  icon="pi pi-check" className="p-button-rounded round scalein animation-duration-500" onClick={(e)=>{onConfirmChange(setLnDisabled, setLastName)}}/>
+                                    <Button  icon="pi pi-times" className="p-button-rounded round scalein animation-duration-500" onClick={(e)=>{onCancelChangeLn()}}/>
                                 </span>
                             )}
             </div>
 
             <div id='profile-password-input'>
-                <Button label="Change your password" className="p-button-text" onClick={(e)=>{onEditPassword()}}/>
+                <Button label="Change your password" className="p-button-text text" onClick={(e)=>{onEditPassword()}}/>
                 {(passDisabled) ? (<span>
                                 </span>) : (
                                 <div id='profile-psw-input'>
-                                    <InputText id='old-psw' value={oldPassword}  onChange={(e) => setOldPassword(e.target.value)} placeholder="Old password"/>
-                                    <InputText id='new-psw' value={newPassword}  onChange={(e) => setNewPassword(e.target.value)} placeholder="New password"/>
-                                    <Button className="p-button-rounded" onClick={(e)=>{onChangePasswordClick()}} label='Change password'/>
+                                    <InputText className='fadeinleft animation-duration-500' id='old-psw' value={oldPassword}  onChange={(e) => setOldPassword(e.target.value)} placeholder="Old password"/>
+                                    <InputText className='fadeinleft animation-duration-500' id='new-psw' value={newPassword}  onChange={(e) => setNewPassword(e.target.value)} placeholder="New password"/>
+                                    <Button className="p-button-rounded  round fadeinleft animation-duration-500" onClick={(e)=>{onChangePasswordClick()}} label='Change password'/>
                                 </div>
                             )}
             </div>

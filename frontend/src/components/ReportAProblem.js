@@ -71,7 +71,7 @@ const urgencyLevelList = [
         <div id='report-a-problem-container-flex'>
             <Toast ref={toast} />
             {getNavBar()}
-            <div id='report-a-problem-container-grid'>
+            <div id='report-a-problem-container-grid' className='fadein animation-duration-1000'>
                 
                 <InputTextarea id='report-a-problem-reason' rows={5} cols={50} value={reason} onChange={(e) => setReason(e.target.value)} 
                     autoResize placeholder='Please input your reason'/>

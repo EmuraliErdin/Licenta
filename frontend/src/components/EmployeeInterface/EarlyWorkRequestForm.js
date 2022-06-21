@@ -71,7 +71,7 @@ function EarlyWorkRequestForm() {
         <div id="employee-request-container-flex">
             <Toast ref={toast} />
             <EmployeeNavBar id='employee-request-menu'/>
-            <div id="employee-request-container-grid">
+            <div id="employee-request-container-grid" className="fadein animation-duration-1000">
                 
                 <span id="overtimework-reason" className="p-float-label p-input-icon-right">
                     <i className="pi pi-pencil" />

@@ -16,7 +16,7 @@
     width: 70%;
     height: 100%;
     margin:auto;
-    background-color: #f5f5f5;
+    background-color:  #F6F4E8;
     border-radius: 0% 0% 0% 0% / 0% 0% 0% 0% ;
     /* color: white;
     transition: all .3s ease; */
@@ -46,7 +46,6 @@
 
 .prize-item{
     color: gray;
-    border: #5b5078 3px solid;
     width: 80%;
     height: 80%;
     display: flex;
@@ -59,9 +58,19 @@
 
 .prize-item:hover{
     margin-bottom: 25px;
-    color:grey;
-    border: #ff6600 5px solid;
-    background-color: #a0d6b4;
-    border-radius: 10%;
-    
+    color:#1D3124;
+    border: lightgrey 1px solid;
+    background-color: #BACEC1;
+    border-radius: 10%;   
+}
+
+.dissapearing-item{
+    visibility:hidden;
+    opacity:0;
+    transition: visibility 0.3s linear,opacity 0.3s linear;
+}
+
+.prize-item:hover>.dissapearing-item{
+    visibility:visible;
+    opacity:1;
 }

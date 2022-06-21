@@ -16,7 +16,8 @@
     width: 70%;
     height: 100%;
     margin:auto;
-    background-color: #f5f5f5;
+    background-color: #F6F4E8;
+    color: #1D3124;
     border-radius: 0% 0% 0% 0% / 0% 0% 0% 0% ;
     transition: all .3s ease;
     display: grid;
@@ -25,10 +26,6 @@
     gap:10px;
     align-items:center;
     justify-items:center;
-}
-
-#manager-dashboard-container-flex > #manager-dashboard-container-grid:hover{
-    color:#ff6600;
 }
 
 #manager-menu{
@@ -81,7 +78,7 @@
 .btn-manager {
     width: 30%;
     height: 90%;
-    border: 1px solid #333;
+    border: 1px solid lightgrey;
     font-family: 'Cinzel', serif;
     font-size: 20px;
     cursor: pointer;
@@ -103,6 +100,11 @@
 
 .btn-manager:hover{
     margin-bottom:50px;
+    border-radius: 10%;
+    border: 2px solid grey;
+    color:#1D3124;
+    background-color: #BACEC1;
+    font-size: 25px;
 }
 
 .btn-manager:hover>#access-this-page{

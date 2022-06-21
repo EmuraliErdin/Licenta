@@ -56,11 +56,9 @@ function AdminDashBoard() {
     }
 
     return (
-        userStore.employee.id!=null ? (
-            <div>
-                <div id="admin-dashboard-container-flex">
-                     <Toast ref={toast} position="top-left"></Toast>
-                    {<AdminNavBar/>}
+            <div id="admin-dashboard-container-flex" className='fadein animation-duration-1000'>
+                <Toast ref={toast} position="top-left"></Toast>
+                {<AdminNavBar/>}
                 <div className="fadein animation-duration-1000" id="admin-dashboard">
                     <DataTable id="issue-list" value={issueList} responsiveLayout="scroll">
                         <Column field="priorityLevel" header="Priority Level"></Column>
@@ -70,12 +68,7 @@ function AdminDashBoard() {
                         <Column bodyStyle={{ textAlign: 'center' }} body={getButton} header="Mark as solved"/>
                     </DataTable>
                 </div>
-        </div>
             </div>
-              ) : (
-                <Navigate replace to={{ pathname: '/'}} />
-              )
-
     )
 
 }

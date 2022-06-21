@@ -20,13 +20,13 @@
     border-radius: 0% 0% 0% 0% / 0% 0% 0% 0% ;
     color: white;
     transition: all .3s ease;
-
     display: grid;
     grid-template-columns: repeat(3,1fr);
     grid-template-rows: repeat(9,1fr);
     gap:10px;
     align-items:center;
     justify-items:center;
+    background-color:#F6F4E8;
 }
 
 #overtimework-reason{
@@ -47,9 +47,36 @@
     color: black;
 }
 
+.p-datepicker-trigger{
+    color: #1D3124;
+    background-color:#BACEC1;
+    border:#BACEC1;
+}
+
+.p-datepicker-trigger:enabled:hover{
+    background-color: #1D3124;
+    color:#BACEC1;
+    
+}
+
+.p-datepicker table td > span.p-highlight{
+    color:#1D3124;
+    background-color: #BACEC1;
+}
+
 #overtime-work-btn-submit{
     grid-column: 2/3;
     grid-row:5/6;
+}
+
+.btn-rounded{
+    background-color: #BACEC1;
+    color: #1D3124;
+}
+
+.btn-rounded:enabled:hover{
+    color: #BACEC1;
+    background-color: #1D3124;
 }
 
 .input{

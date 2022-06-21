@@ -17,7 +17,10 @@ function EmployeesRequests() {
     const [expandedRows, setExpandedRows] = useState(null);
     const [requests, setRequests] = useState([])
     const [displayDialog, setDisplayDialog] = useState(false)
-    let employee = null
+    const [displayLogs, setDisplayLogs] = useState(false)
+    const [displayAccess, setDisplayAccess] = useState(false)
+    const [logs, setLogs] = useState([])
+    const [employee, setEmployee] = useState(null)
     const toast = useRef(null);
 
     useEffect(()=>{
@@ -64,7 +67,7 @@ function EmployeesRequests() {
     const getMembers = async () => {
         const membersResponse = await fetch(`/api/departments/${userStore.employee.departmentId}/employees`)
         const membersList = await membersResponse.json();
-        
+
         setMembers(membersList)
         setTimeout(() => {
             setIsLoading(false)
@@ -131,10 +134,8 @@ const updateRequest = async (status, requestId)=> {
     }
 }
 
-    const rowExpansionTemplate = (data) => {
-       
+    const rowExpansionTemplate = (data) => {    
         let requestsOfEmployee = []
-        
         for(let i=0;i<requests.length;i++){
             if(requests[i].employeeId == data.id){
                 requestsOfEmployee.push(requests[i])
@@ -158,29 +159,48 @@ const updateRequest = async (status, requestId)=> {
     }
 
     const handleClickOnEmployee = (e) =>{
-        employee = e
+        setEmployee(e)
         setDisplayDialog(true)
     }
 
-    const onHide = () => {
+    const onHideDialog = () => {
         setDisplayDialog(false)
+    }
+
+    const onHideLogs = () => {
+        setDisplayLogs(false)
+    }
+
+    const displayEmployeeLogs = async () => {
+        setDisplayDialog(false)
+        setDisplayLogs(true)
+        const responseLogs = await fetch(`/api/employees/${employee.id}/logs`)
+        const logArray = await responseLogs.json();
+        setLogs(logArray)
     }
 
     return (
         <div id='department-members-container-flex'> 
             <Toast ref={toast} />
-            <Dialog header="Choose an action" visible={displayDialog} style={{ width: '50vw' }} onHide={() => onHide()}>
+            <Dialog id="dialog-options" header="Choose an action" visible={displayDialog} style={{ width: '50vw' }} onHide={() => onHideDialog()}>
                 <div id='department-members-dialog-container'>
-                    <Button label="See employee log" className="p-button-outlined department-members-dialog-buttons" />
-                    <Button label="Give this employee a role" className="p-button-outlined department-members-dialog-buttons" />
+                    <Button label="See employee log" onClick={() => {displayEmployeeLogs()}} className="p-button-outlined department-members-dialog-buttons btn-dialog" />
+                    <Button onClick={displayEmployeeLogs} label="Give this employee a role" className="p-button-outlined department-members-dialog-buttons btn-dialog" />
                 </div>
             </Dialog>
+
+            <Dialog id="log-dialog" header="These are the logs for the selected employee" visible={displayLogs} style={{ width: '50vw' }} onHide={() => onHideLogs()}>
+            <DataTable value={logs} lazy responsiveLayout="scroll" dataKey="id">
+                    <Column field="action" sortable header="Action"/>
+                    <Column field="date" header="Date"/>
+                </DataTable>
+            </Dialog>
+
             {getNavBar()}
             <div id='department-members-list-container'>
                 <DataTable value={members} onRowClick={(row) => handleClickOnEmployee(row.data)} expandedRows={expandedRows} stripedRows responsiveLayout="scroll" loading={isLoading}
                            onRowToggle={(e) => setExpandedRows(e.data)}
                            rowExpansionTemplate={(data) => rowExpansionTemplate(data)}>
-
                     <Column expander style={{ width: '3em' }} />
                     <Column field="firstName" header="First name"></Column>
                     <Column field="lastName" header="Last name"></Column>

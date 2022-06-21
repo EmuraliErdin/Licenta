@@ -15,7 +15,7 @@
 #report-a-problem-container-flex > #report-a-problem-container-grid{
     width: 70%;
     height: 100%;
-    background-color: #f5f5f5;
+    background-color:  #F6F4E8;
     border-radius: 0% 0% 0% 0% / 0% 0% 0% 0% ;
     color: white;
     transition: all .3s ease;
@@ -35,7 +35,7 @@
 #report-a-problem-urgency-header{
     grid-column: 2/3;
     grid-row: 3/4;
-    color: #495057;
+    color: #E59560;
     align-self: end;
 }
 
@@ -49,5 +49,20 @@
     grid-column: 2/3;
     grid-row: 5/6;
     width: 30%;
-    color: #495057;
+    color: #1D3124;
+}
+
+#report-a-problem-btn-send:hover{
+    color:#BACEC1;
+}
+
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight{
+    background-color: #BACEC1;
+    color: #1D3124;
+}
+
+.p-inputtext:enabled:focus, #report-a-problem-urgency-level {
+    box-shadow: 0 0 0 0.2rem #BACEC1;
+    border-color: #1D3124;
+    
 }

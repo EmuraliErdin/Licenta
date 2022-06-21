@@ -40,3 +40,32 @@
     display: flex;
     flex-direction: column;
 }
+
+.p-dialog-draggable .p-dialog-header, .p-dialog .p-dialog-content{
+    color: #1D3124;
+    background-color: #F6F4E8;
+}
+
+.p-button.p-button-outlined{
+    color:#1D3124;
+    background-color: #BACEC1;
+}
+
+.p-button.p-button-outlined:enabled:hover{
+    background-color:#1D3124;
+    color: #BACEC1;
+}
+
+.p-dialog .p-dialog-footer{
+    background-color: #F6F4E8;
+}
+
+.p-dialog .p-dialog-footer button{
+    color:#1D3124;
+    background-color: #BACEC1;
+}
+
+.p-dialog .p-dialog-footer button:enabled:hover{
+    background-color:#1D3124;
+    color: #BACEC1;
+}

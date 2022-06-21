@@ -217,7 +217,6 @@ endDate:{
 timestamps: false
 })
 
-
 const Prize = sequelize.define('prize',{
 id: {
     type: Sequelize.UUID,

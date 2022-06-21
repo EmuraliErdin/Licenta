@@ -135,7 +135,7 @@ function CreateAccountForm() {
                 <InputText id = "create-acc-dialog-code" placeholder = "4-digit code" value = {code} onChange = {(e) => setCode(e.target.value)} />
             </Dialog>
 
-            <div className="create-acc-container">
+            <div className="create-acc-container fadein animation-duration-1000">
                 <Toast ref={toast} position='top-right' />
                 <h1 id="create-acc-header-text">Create your account</h1>
                 <InputText id = "create-acc-first-name" placeholder = "First Name" value = {firstName} onChange = {(e) => setFirstName(e.target.value)} /> 

@@ -71,7 +71,7 @@ function OvertimeWorkRequestForm() {
         <div id="employee-request-container-flex">
             <Toast ref={toast} />
             <EmployeeNavBar id='employee-request-menu'/>
-            <div id="employee-request-container-grid">
+            <div id="employee-request-container-grid" className="fadein animation-duration-1000">
                 
                 <span id="overtimework-reason" className="p-float-label p-input-icon-right">
                     <i className="pi pi-pencil" />
@@ -86,12 +86,12 @@ function OvertimeWorkRequestForm() {
                 </span>
 
                 <div id='overtime-work-day'>
-                        <label htmlFor="overtime-work-calendar">Calendar</label>
+                    <label htmlFor="overtime-work-calendar">Calendar</label>
                     <Calendar dateFormat="yy-mm-dd" showIcon id="overtime-work-calendar" className='input' value={date} onChange={(e) => setDate(e.value)  }></Calendar>
                 </div>
 
                 <div id='overtime-work-btn-submit'>
-                    <Button label="Create request" className="p-button-raised p-button-rounded" onClick={submitData}/>
+                    <Button label="Create request" className="p-button-raised p-button-rounded btn-rounded" onClick={submitData}/>
                 </div>
 
 

@@ -10,13 +10,14 @@
     align-items: center;
     justify-content: center;
     background-color: #ddd;
+    color:#1D3124;
 }
 
 #change-department-container-flex > #change-department-container-grid{
     width: 70%;
     height: 100%;
     margin:auto;
-    background-color: #f5f5f5;
+    background-color: #F6F4E8;
     transition: all .3s ease;
     display: grid;
     grid-template-columns: 1fr 5fr 1fr;
@@ -27,7 +28,6 @@
 }
 
 #change-department-header{
-    color: gray;
     grid-row: 2/3;
     grid-column: 2/3;
 }
@@ -46,6 +46,15 @@
 #btn-change-department{
     grid-row: 5/6;
     grid-column: 2/3;
-    background-color: #ddd;
-    color: gray;
+    background-color: #BACEC1;
+    color:#1D3124;
+    border-color: #1D3124;
+}
+
+#btn-change-department:hover{
+    grid-row: 5/6;
+    grid-column: 2/3;
+    color: #BACEC1;
+    background-color:#1D3124;
+    border-color: #1D3124;
 }

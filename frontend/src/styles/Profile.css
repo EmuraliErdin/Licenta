@@ -25,6 +25,7 @@
     gap:10px;
     align-items:center;
     justify-items:center;
+    background-color:#F6F4E8;
 }
 
 #profile-fn-input{
@@ -52,4 +53,14 @@
     gap: 10px;
     justify-items: center;
     align-items: center;
+}
+
+.round:hover, .text:hover{
+    color:#BACEC1 !important;
+    background-color: #1D3124 !important;
+}
+
+.round, .text{
+    color:#1D3124 !important;
+    background-color: #BACEC1 !important;
 }

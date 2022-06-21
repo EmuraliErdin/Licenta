@@ -23,7 +23,7 @@ function EmployeeDashBoard() {
     return (
         <div id="employee-dashboard-container-flex">
           <EmployeeNavBar id='employee-dashboard-menu'/>
-            <div id="employee-dashboard-container-grid">
+            <div id="employee-dashboard-container-grid" className='fadein animation-duration-1000'>
                 
                 <div id='employee-header-dashboard'>
                   <h1>Homepage</h1>
