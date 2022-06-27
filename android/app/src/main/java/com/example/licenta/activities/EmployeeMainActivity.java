@@ -68,6 +68,9 @@ public class EmployeeMainActivity extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(v->{
             switch (v.getItemId())
             {
+                case R.id.item_home:
+                    openFragment(homeFragment);
+                    break;
                 case R.id.item_add_time:
                     openFragment(overtimeWorkRequestFragment);
                     break;
@@ -109,12 +112,14 @@ public class EmployeeMainActivity extends AppCompatActivity {
 
     //Initialize the views
     private void init() {
+        overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
         navigationView = findViewById(R.id.navigation_view);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         drawerLayout = findViewById(R.id.drawerLayout);
         toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.open_toggle, R.string.close_toggle);
         drawerLayout.addDrawerListener(toggle);
+        toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.darkgreen));
         toggle.syncState();
 
         employee = (Employee) getIntent().getSerializableExtra("employee");
@@ -159,8 +164,13 @@ public class EmployeeMainActivity extends AppCompatActivity {
                     }
                 },
                 error -> {});
-
         Volley.newRequestQueue(getApplicationContext()).add(jsonObjectRequest);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
     }
 
 }

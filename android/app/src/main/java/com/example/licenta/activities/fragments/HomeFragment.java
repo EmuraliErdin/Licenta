@@ -19,7 +19,6 @@ import com.example.licenta.classes.Employee;
 public class HomeFragment extends Fragment {
     TextView tvLevel;
     TextView tvExperience;
-    ProgressBar pbProgress;
     Employee employee;
 
     public HomeFragment() {
@@ -56,9 +55,7 @@ public class HomeFragment extends Fragment {
     private void init() {
         tvLevel = getView().findViewById(R.id.tvLevel);
         tvExperience = getView().findViewById(R.id.tvExperience);
-        pbProgress =getView().findViewById(R.id.pbProgress);
         tvLevel.setText("Level: "+employee.getLevel());
         tvExperience.setText(""+employee.getExperience()+"/"+100*employee.getLevel());
-        pbProgress.setProgress(employee.getExperience()/(100*employee.getLevel()));
     }
 }

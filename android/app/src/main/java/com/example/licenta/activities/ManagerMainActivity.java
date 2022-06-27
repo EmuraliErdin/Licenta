@@ -17,6 +17,7 @@ import com.android.volley.Request;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.licenta.R;
+import com.example.licenta.activities.fragments.HomeFragment;
 import com.example.licenta.activities.fragments.ProfileFragment;
 import com.example.licenta.activities.fragments.ReportAProblemFragment;
 import com.example.licenta.activities.fragments.manager.EmployeeListFragment;
@@ -41,12 +42,14 @@ public class ManagerMainActivity extends AppCompatActivity {
     ProfileFragment profileFragment = new ProfileFragment();
     ReportAProblemFragment reportAProblemFragment = new ReportAProblemFragment();
     EmployeeListFragment employeeListFragment = new EmployeeListFragment();
+    HomeFragment homeFragment = new HomeFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manager_main);
         init();
+        openFragment(homeFragment);
         setUpFragments();
         setUpListener();
     }
@@ -59,8 +62,8 @@ public class ManagerMainActivity extends AppCompatActivity {
                 case R.id.item_profile:
                     openFragment(profileFragment);
                     break;
-                case R.id.item_stats:
-                    Toast.makeText(this, "Stats", Toast.LENGTH_SHORT).show();
+                case R.id.item_home:
+                    openFragment(homeFragment);
                     break;
                 case R.id.item_employees_requests:
                     openFragment(employeeRequestsFragment);
@@ -79,6 +82,7 @@ public class ManagerMainActivity extends AppCompatActivity {
     }
 
     private void init() {
+        overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
         navigationView = findViewById(R.id.navigation_view_manager);
         toolbar = findViewById(R.id.toolbar_manager);
         setSupportActionBar(toolbar);
@@ -88,6 +92,7 @@ public class ManagerMainActivity extends AppCompatActivity {
         toggle.syncState();
         employee = (Employee) getIntent().getSerializableExtra("employee");
 
+        toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.darkgreen));
         tvName = navigationView.getHeaderView(0).findViewById(R.id.tvName);
         tvLevel = navigationView.getHeaderView(0).findViewById(R.id.tvNavLevel);
         tvEmail = navigationView.getHeaderView(0).findViewById(R.id.tvEmail);
@@ -111,12 +116,20 @@ public class ManagerMainActivity extends AppCompatActivity {
         employeeRequestsFragment.setArguments(bundle);
         profileFragment.setArguments(bundle);
         employeeListFragment.setArguments(bundle);
+        homeFragment.setArguments(bundle);
     }
 
     private void openFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_right);
         fragmentTransaction.replace(R.id.fragment_container_manager,fragment);
         fragmentTransaction.commit();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
     }
 }

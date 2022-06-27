@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/beige">
 
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
@@ -17,6 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
+        android:textColor="@color/darkgreen"
         android:text="@string/overtime_work_request_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,6 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:ems="10"
+        android:textColor="@color/darkgreen"
         android:hint="@string/reason"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="@+id/tvEmployeeFragmentOvertimeRequestTitle"
@@ -39,6 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
+        android:textColor="@color/darkgreen"
         android:text="@string/request_date"
         app:layout_constraintEnd_toEndOf="@+id/edtEmployeeFragmentOvertimeReason"
         app:layout_constraintStart_toStartOf="@+id/edtEmployeeFragmentOvertimeReason"
@@ -49,6 +53,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
+        android:textColor="@color/darkgreen"
         android:text="@string/number_of_hours"
         app:layout_constraintEnd_toEndOf="@+id/calendarEmployeeFragmentOvertime"
         app:layout_constraintStart_toStartOf="@+id/calendarEmployeeFragmentOvertime"
@@ -59,6 +64,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
+        android:textColor="@color/darkgreen"
         android:ems="10"
         android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="@+id/textView9"
@@ -70,6 +76,8 @@
         android:id="@+id/btnEmployeeFragmentOvertimeSubmit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/darkgreen"
+        android:backgroundTint="@color/lightgreen"
         android:layout_marginTop="50dp"
         android:text="@string/submit"
         app:layout_constraintEnd_toEndOf="@+id/edtEmployeeFragmentOvertimeNumberOfHours"

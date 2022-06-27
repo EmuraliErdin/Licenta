@@ -71,11 +71,14 @@ public class EarlyWorkRequestFragment extends Fragment {
                 return;
             }
             Request request = formRequest();
-
+            String url =  getString(R.string.url)+"requests";
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(com.android.volley.Request.Method.POST,
-                    getString(R.string.url)+"requests", RequestJsonConverter.convertToJson(request),
+                    url, RequestJsonConverter.convertToJson(request),
                     response -> {Toast.makeText(getContext(),"The request was saved successfully!",Toast.LENGTH_SHORT).show();},
                     error -> {Toast.makeText(getContext(),"The request could not be saved",Toast.LENGTH_SHORT).show();});
+            RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+            requestQueue.add(jsonObjectRequest);
+
 
             Log log = new Log();
             log.setCreateDate(LocalDate.now());
@@ -87,8 +90,7 @@ public class EarlyWorkRequestFragment extends Fragment {
                     response -> {},
                     error -> {});
 
-            RequestQueue requestQueue = Volley.newRequestQueue(getContext());
-            requestQueue.add(jsonObjectRequest);
+
             requestQueue.add(jsonActionRequest);
 
         });

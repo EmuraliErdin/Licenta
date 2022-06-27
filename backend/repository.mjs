@@ -6,6 +6,8 @@ const sequelize = new Sequelize({
     storage: './licenta.db'
 });
 
+
+
 const Departament = sequelize.define('department',{
     id: {
         type: Sequelize.UUID,

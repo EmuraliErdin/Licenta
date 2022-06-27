@@ -101,6 +101,7 @@ public class IssueListFragment extends Fragment implements IssueAdapter.OnNoteLi
                                 } catch (Exception e){
                                     e.printStackTrace();
                                 }
+
                                 JsonObjectRequest obj = new JsonObjectRequest(Request.Method.PATCH,url,jsonObject,
                                         response -> {
                                             Toast.makeText(getContext(),"Success",Toast.LENGTH_SHORT);

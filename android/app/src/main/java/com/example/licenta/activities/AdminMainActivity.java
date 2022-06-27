@@ -73,12 +73,14 @@ public class AdminMainActivity extends AppCompatActivity {
 
     //Initialize the views
     private void init() {
+        overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
         navigationView = findViewById(R.id.navigation_view_admin);
         toolbar = findViewById(R.id.toolbar_admin);
         setSupportActionBar(toolbar);
         drawerLayout = findViewById(R.id.drawerLayoutAdmin);
         toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.open_toggle, R.string.close_toggle);
         drawerLayout.addDrawerListener(toggle);
+        toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.darkgreen));
         toggle.syncState();
         tvName = navigationView.getHeaderView(0).findViewById(R.id.tvName);
         openFragment(createPrizeFragment);
@@ -94,14 +96,18 @@ public class AdminMainActivity extends AppCompatActivity {
         tvProgress.setText("");
         tvLevel.setText("");
     }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
+    }
 
     private void openFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_right);
         fragmentTransaction.replace(R.id.fragment_container_admin,fragment);
         fragmentTransaction.commit();
     }
-
-
 
 }

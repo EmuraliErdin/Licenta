@@ -4,15 +4,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/beige">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".activities.fragments.admin.CreatePrizeFragment">
 
-
         <TextView
+            android:textColor="@color/darkgreen"
             android:id="@+id/textView15"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -26,6 +27,7 @@
             android:id="@+id/edtTitleOfPrize"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/darkgreen"
             android:layout_marginTop="20dp"
             android:ems="10"
             android:inputType="textPersonName"
@@ -38,6 +40,7 @@
             android:id="@+id/edtPrizeDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/darkgreen"
             android:layout_marginTop="20dp"
             android:ems="10"
             android:hint="@string/description_of_prize"
@@ -51,6 +54,7 @@
             android:id="@+id/edtNecessaryLevel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/darkgreen"
             android:layout_marginTop="20dp"
             android:ems="10"
             android:hint="@string/necessary_level"
@@ -63,6 +67,8 @@
             android:id="@+id/btnSubmitDepartmentNamee"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/darkgreen"
+            android:backgroundTint="@color/lightgreen"
             android:layout_marginTop="40dp"
             android:text="@string/submit"
             app:layout_constraintEnd_toEndOf="@+id/edtNecessaryLevel"

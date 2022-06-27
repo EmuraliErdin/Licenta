@@ -6,7 +6,8 @@
     android:layout_height="90dp"
     android:background="?android:attr/selectableItemBackground"
     android:clickable="true"
-    android:focusable="true">
+    android:focusable="true"
+    android:backgroundTint="@color/beige">
 
 
     <ImageView
@@ -17,7 +18,8 @@
         android:layout_marginTop="25dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_person" />
+        app:srcCompat="@drawable/ic_person"
+        app:tint="@color/darkgreen" />
 
     <TextView
         android:id="@+id/tvEmployeeListName"

@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.EmailCodeActivity">
+    tools:context=".activities.EmailCodeActivity"
+    android:background="@color/beige">
 
     <TextView
         android:id="@+id/textView11"
@@ -13,6 +14,7 @@
         android:layout_marginTop="200dp"
         android:text="@string/emailed_code"
         app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@color/darkgreen"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -22,6 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
         android:ems="10"
+        android:textColor="@color/darkgreen"
         android:inputType="numberDecimal"
         android:hint="4 digit code"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,16 +38,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
         android:text="@string/submit"
+        android:textColor="@color/darkgreen"
+        android:backgroundTint="@color/lightgreen"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edtNumericCode" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="@string/expire"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnCodeSubmit" />
 </androidx.constraintlayout.widget.ConstraintLayout>

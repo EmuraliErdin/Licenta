@@ -112,7 +112,7 @@ public class CreateAccountActivity extends AppCompatActivity {
         btnBack = findViewById(R.id.btnBack);
         btnCreateAccount = findViewById(R.id.btnCreateAccount);
         getDepartments();
-
+        overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
     }
 
     //get a list of all departments and putting it in the spinner
@@ -136,7 +136,12 @@ public class CreateAccountActivity extends AppCompatActivity {
 
         RequestQueue rq = Volley.newRequestQueue(this);
         rq.add(jsonArrayRequest);
+    }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
 
     }
 

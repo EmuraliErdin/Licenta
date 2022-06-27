@@ -45,7 +45,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestV
     public void onBindViewHolder(@NonNull RequestViewHolder holder, int position) {
         Request request = requestList.get(position);
         String name = nameList.get(position);
-        holder.tvRequestType.setText("Type: "+request.getType());
+        holder.tvRequestType.setText("Type: "+((request.getType()=="SUBTRACT_HOURS")?"early leave":"overtime work"));
         holder.tvRequestDate.setText("Requested date: "+request.getRequestDate().toString());
         holder.tvNumberOfHours.setText("Number of hours requested:"+request.getNumberOfHours());
         holder.tvCreateDate.setText("Created on: "+request.getCreateDate().toString());
@@ -58,7 +58,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestV
                 holder.imageview.setColorFilter(ContextCompat.getColor(context, R.color.yellow), android.graphics.PorterDuff.Mode.MULTIPLY);
                 break;
             case "ACCEPTED":
-                holder.imageview.setColorFilter(ContextCompat.getColor(context, R.color.green), android.graphics.PorterDuff.Mode.MULTIPLY);
+                holder.imageview.setColorFilter(ContextCompat.getColor(context, R.color.lightgreen), android.graphics.PorterDuff.Mode.MULTIPLY);
                     break;
             case "REFUSED":
                 holder.imageview.setColorFilter(ContextCompat.getColor(context, R.color.red), android.graphics.PorterDuff.Mode.MULTIPLY);

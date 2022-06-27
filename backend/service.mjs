@@ -62,21 +62,6 @@ import {sendEmailTo, sortByDate, formatDate} from './utils.mjs'
             console.log(request.body, valid(Model, request.body));
             
             if(valid(Model, request.body)) {
-                // if(Model==Employee){
-                //     let department = await Departament.findOne({where:{title:request.body.departmentTitle}})
-                //     if(department){
-                //         let employee = request.body;
-                //         employee.departmentId = department.dataValues.id;
-                //         await Employee.create(employee)
-                //         console.log("AAAAAAAAAAAAAAAAAAAAAAAAAA");
-                //         response.status(201).json({message:"Ok"}).send();
-                //         return;
-                //     }else{
-                //         response.status(404).json({message:"Department does not exist"}).send();
-                //         return;
-                //     }
-                // }
-                
                 let record = await Model.create(request.body);
                 response.status(201)
                 .location(`http://${request.headers.host}${request.baseUrl}${request.url}${request.url.endsWith('/')? '' : '/'}${record.id}`).
@@ -212,7 +197,7 @@ import {sendEmailTo, sortByDate, formatDate} from './utils.mjs'
                     await Log.create(log)
                     sendNotificationToEmployee(employee.dataValues.firstName,employee.dataValues.email, requestM.reason, requestM.status)
                 }
-                response.status(204).send();
+                response.status(204).json({message:"OK"}).send();
                 }
              else{
                  response.status(404).send();

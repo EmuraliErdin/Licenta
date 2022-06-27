@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.fragments.manager.SingleEmployeeRequestsFragment">
+    tools:context=".activities.fragments.manager.SingleEmployeeRequestsFragment"
+    android:background="@color/beige">
 
 
     <TextView

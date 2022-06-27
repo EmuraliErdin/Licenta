@@ -39,6 +39,9 @@
 #department-members-dialog-container{
     display: flex;
     flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
 }
 
 .p-dialog-draggable .p-dialog-header, .p-dialog .p-dialog-content{
@@ -66,6 +69,34 @@
 }
 
 .p-dialog .p-dialog-footer button:enabled:hover{
+    background-color:#1D3124;
+    color: #BACEC1;
+}
+
+#log-dialog{
+    width: 80%;
+}
+
+#access-dialog-container{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+#btn-send-role{
+    color:#1D3124;
+    background-color: #BACEC1;
+    border-color: #1D3124;
+
+}
+
+.p-dropdown:not(.p-disabled):hover{
+    box-shadow: 0 0 0 0.2rem #BACEC1;
+}
+
+#btn-send-role:enabled:hover{
     background-color:#1D3124;
     color: #BACEC1;
 }

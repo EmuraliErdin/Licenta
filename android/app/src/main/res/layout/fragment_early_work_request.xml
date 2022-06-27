@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/beige"
     tools:ignore="SpeakableTextPresentCheck">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,6 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
+            android:textColor="@color/darkgreen"
             android:text="@string/early_work_request_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -27,6 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
             android:ems="10"
+            android:textColor="@color/darkgreen"
             android:hint="@string/reason"
             android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="@+id/tvEmployeeFragmentEarlyRequestTitle"
@@ -39,6 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:text="@string/request_date"
+            android:textColor="@color/darkgreen"
             app:layout_constraintEnd_toEndOf="@+id/edtEmployeeFragmentEarlyReason"
             app:layout_constraintStart_toStartOf="@+id/edtEmployeeFragmentEarlyReason"
             app:layout_constraintTop_toBottomOf="@+id/edtEmployeeFragmentEarlyReason" />
@@ -46,6 +50,7 @@
         <TextView
             android:id="@+id/textView9"
             android:layout_width="wrap_content"
+            android:textColor="@color/darkgreen"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
             android:text="@string/number_of_hours"
@@ -58,6 +63,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
+            android:textColor="@color/darkgreen"
             android:ems="10"
             android:inputType="numberDecimal"
             app:layout_constraintEnd_toEndOf="@+id/textView9"
@@ -69,6 +75,8 @@
             android:id="@+id/btnEmployeeFragmentEarlySubmit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/darkgreen"
+            android:backgroundTint="@color/lightgreen"
             android:layout_marginTop="50dp"
             android:text="@string/submit"
             app:layout_constraintEnd_toEndOf="@+id/edtEmployeeFragmentEarlyNumberOfHours"

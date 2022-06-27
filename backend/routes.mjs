@@ -19,7 +19,7 @@ router.route('/employees')
     
  router.route('/employees/:id')
     .get((request, response)=> getRecord(Employee, request, response))
-    .head((request, response)=> headRecord(Employee, request, response))//verifica daca exista
+    .head((request, response)=> headRecord(Employee, request, response)) 
     .put((request, response)=> putRecord(Employee, request, response))
     .patch((request, response)=> patchRecord(Employee, request, response))
     .delete((request, response)=> deleteRecord(Employee, request, response))
@@ -31,14 +31,14 @@ router.route('/requests')
     
  router.route('/requests/:id')
     .get((request, response)=> getRecord(Request, request, response))
-    .head((request, response)=> headRecord(Request, request, response))//verifica daca exista
+    .head((request, response)=> headRecord(Request, request, response)) 
     .put((request, response)=> putRecord(Request, request, response))
     .patch((request, response)=> patchRecord(Request, request, response))
     .delete((request, response)=> deleteRecord(Request, request, response))
     
  router.route('/requests/:id')
     .get((request, response)=> getRecord(Request, request, response))
-    .head((request, response)=> headRecord(Request, request, response))//verifica daca exista
+    .head((request, response)=> headRecord(Request, request, response)) 
     .put((request, response)=> putRecord(Request, request, response))
     .patch((request, response)=> patchRecord(Request, request, response))
     .delete((request, response)=> deleteRecord(Request, request, response))
@@ -50,7 +50,7 @@ router.route('/requests')
     
  router.route('/departments/:id')
     .get((request, response)=> getRecord(Departament, request, response))
-    .head((request, response)=> headRecord(Departament, request, response))//verifica daca exista
+    .head((request, response)=> headRecord(Departament, request, response)) 
     .put((request, response)=> putRecord(Departament, request, response))
     .patch((request, response)=> patchRecord(Departament, request, response))
     .delete((request, response)=> deleteRecord(Departament, request, response))
@@ -71,7 +71,7 @@ router.route('/requests')
     
     router.route('/accesses/:id')
     .get((request, response)=> getRecord(Access, request, response))
-    .head((request, response)=> headRecord(Access, request, response))//verifica daca exista
+    .head((request, response)=> headRecord(Access, request, response)) 
     .put((request, response)=> putRecord(Access, request, response))
     .patch((request, response)=> patchRecord(Access, request, response))
     .delete((request, response)=> deleteRecord(Access, request, response))
@@ -84,7 +84,7 @@ router.route('/requests')
    
     router.route('/issues/:id')
     .get((request, response)=> getRecord(Issue, request, response))
-    .head((request, response)=> headRecord(Issue, request, response))//verifica daca exista
+    .head((request, response)=> headRecord(Issue, request, response)) 
     .put((request, response)=> putRecord(Issue, request, response))
     .patch((request, response)=> patchRecord(Issue, request, response))
     .delete((request, response)=> deleteRecord(Issue, request, response))

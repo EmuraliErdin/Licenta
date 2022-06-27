@@ -39,6 +39,7 @@ public class EmailCodeActivity extends AppCompatActivity {
         employee = (Employee) getIntent().getSerializableExtra("employee");
         edtCode = findViewById(R.id.edtNumericCode);
         btnSubmit = findViewById(R.id.btnCodeSubmit);
+        overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
     }
 
     //sets up the only listener availble
@@ -76,6 +77,12 @@ public class EmailCodeActivity extends AppCompatActivity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
     }
 
 }

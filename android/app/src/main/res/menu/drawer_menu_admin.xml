@@ -25,6 +25,5 @@
             android:id="@+id/item_check_issues"
             android:title="@string/check_issues"
             android:icon="@drawable/ic_report_problem"/>
-
     </group>
 </menu>
