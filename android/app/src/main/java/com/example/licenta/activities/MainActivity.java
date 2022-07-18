@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
                     jsonObject.put("email",edtPopUpEmail.getText().toString());
 
                     JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST,url,jsonObject,
-                            response -> {},
+                            response -> {Toast.makeText(getApplicationContext(),"Check your email for the new password!",Toast.LENGTH_SHORT).show();},
                             error -> {Toast.makeText(getApplicationContext(),"Something went wrong.",Toast.LENGTH_SHORT).show();});
                     Volley.newRequestQueue(getApplicationContext()).add(jsonObjectRequest);
 

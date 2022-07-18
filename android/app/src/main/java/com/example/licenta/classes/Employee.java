@@ -10,8 +10,8 @@ public class Employee implements Serializable {
     private String password;
     private boolean isManager;
     private String departmentId;
-    private int level;
-    private int experience;
+    private int level=1;
+    private int experience=1;
 
     public Employee() {
 

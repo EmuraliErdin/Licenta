@@ -88,7 +88,7 @@ public class GiveRolesFragment extends Fragment {
 
             Log log = new Log();
             log.setEmployeeID(manager.getId());
-            log.setAction(Log.modifyEmployeeRequest(manager.getFirstName()+" "+manager.getLastName()
+            log.setAction(Log.modifyEmployeeRole(manager.getFirstName()+" "+manager.getLastName()
                     , employee.getFirstName() + employee.getLastName(), role.getType(),role.getEndDate()));
             log.setCreateDate(LocalDate.now());
 
@@ -138,8 +138,8 @@ public class GiveRolesFragment extends Fragment {
                         case "READ_WRITE_COLLEAGUES":
                             spinRoles.setSelection(1);
                             break;
-                        case "READ_COLLEAGUES":
-                            spinRoles.setSelection(2);
+                        case "NONE":
+                            spinRoles.setSelection(0);
                             break;
                     }
                     tvCurrentRole.setText("Current role is "+role.getType()+" and it is effective until "+role.getEndDate().toString());

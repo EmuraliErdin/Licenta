@@ -74,8 +74,9 @@ public class ManagerMainActivity extends AppCompatActivity {
                 }
                 case R.id.report_a_problem:{
                     openFragment(reportAProblemFragment);
+                    break;
                 }
-                break;
+
             }
             return true;
         });

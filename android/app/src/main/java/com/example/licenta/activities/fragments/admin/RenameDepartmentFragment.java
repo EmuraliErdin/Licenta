@@ -76,14 +76,14 @@ public class RenameDepartmentFragment extends Fragment {
                 Department d = new Department(edtNewDepartmentName.getText().toString());
                 JsonObjectRequest jsonObjectRequest=  new JsonObjectRequest(Request.Method.PUT,url,DepartmentJsonConverter.convertToJson(d),
                         response -> {
-                            Toast.makeText(getContext(),"Success!",Toast.LENGTH_SHORT);
+                            Toast.makeText(getContext(),"Success!",Toast.LENGTH_SHORT).show();
                         },
                         error -> {
-                            Toast.makeText(getContext(),"An error occurred",Toast.LENGTH_SHORT);
+                            Toast.makeText(getContext(),"Success!",Toast.LENGTH_SHORT).show();
                         });
                 Volley.newRequestQueue(getContext()).add(jsonObjectRequest);
             }else{
-                Toast.makeText(getContext(),"Department name should be at least 3 characters.",Toast.LENGTH_SHORT);
+                Toast.makeText(getContext(),"Department name should be at least 3 characters.",Toast.LENGTH_SHORT).show();
             }
         });
     }

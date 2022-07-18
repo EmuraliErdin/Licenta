@@ -55,7 +55,7 @@ public class CreateAccountActivity extends AppCompatActivity {
 
                 String url = getResources().getString(R.string.url) + "firstPartCreateAccount";
                 JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, EmployeeJsonConverter.convertToJson(employee),
-                        response -> {startActivity(intent); Toast.makeText(this, "Gogonica", Toast.LENGTH_SHORT).show();},
+                        response -> {startActivity(intent); },
                         error -> Toast.makeText(this, "Something went wrong. Please try again later.", Toast.LENGTH_SHORT).show()
                         );
                 RequestQueue rq = Volley.newRequestQueue(this);

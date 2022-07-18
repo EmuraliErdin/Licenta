@@ -38,9 +38,6 @@ public class CreatePrizeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-
-        }
     }
 
     @Override
@@ -85,16 +82,16 @@ public class CreatePrizeFragment extends Fragment {
     private boolean validate() {
         try {
             if(edtPrizeTitle.getText().toString().length()<=3) {
-                Toast.makeText(getContext(),"The title must contain something", Toast.LENGTH_SHORT);
+                Toast.makeText(getContext(),"The title must contain something", Toast.LENGTH_SHORT).show();
                 return false;
             }
 
-            if(edtPrizeDescription.getText().toString().length()>=13) {
-                Toast.makeText(getContext(),"The description should be under 13 characters", Toast.LENGTH_SHORT);
+            if(edtPrizeDescription.getText().toString().length()>=25) {
+                Toast.makeText(getContext(),"The description should be under 25 characters", Toast.LENGTH_SHORT).show();
                 return false;
             }
             if(Integer.parseInt(edtNecessaryLevel.getText().toString()) <=1) {
-                Toast.makeText(getContext(), "The level must be above 1", Toast.LENGTH_SHORT);
+                Toast.makeText(getContext(), "The level must be above 1", Toast.LENGTH_SHORT).show();
                 return false;
             }
         } catch (Exception e) {
