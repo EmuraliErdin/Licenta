@@ -197,10 +197,10 @@ import {sendEmailTo, sortByDate, formatDate} from './utils.mjs'
                     await Log.create(log)
                     sendNotificationToEmployee(employee.dataValues.firstName,employee.dataValues.email, requestM.reason, requestM.status)
                 }
-                response.status(204).json({message:"OK"}).send();
+                response.status(204).json({message:"OK"});
                 }
              else{
-                 response.status(404).send();
+                 response.status(404).json({message:"A problem appeared"});
              }   
         } catch(error){
             response.status(500).json(error);
@@ -416,7 +416,7 @@ import {sendEmailTo, sortByDate, formatDate} from './utils.mjs'
     
                 if(child){
                     await child.update(request.body)
-                    response.status(202).json({message:'accepted'})
+                    response.status(202).json({message:'Accepted'})
                 }else{
                     response.status(404).json({message:'Child record not found.'})
     

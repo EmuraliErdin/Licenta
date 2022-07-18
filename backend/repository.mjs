@@ -6,8 +6,6 @@ const sequelize = new Sequelize({
     storage: './licenta.db'
 });
 
-
-
 const Departament = sequelize.define('department',{
     id: {
         type: Sequelize.UUID,
@@ -21,7 +19,7 @@ const Departament = sequelize.define('department',{
     }
 }, {
     timestamps: false
-  })
+})
 
 const Employee  = sequelize.define('employee', {
     id: {
@@ -57,7 +55,7 @@ const Employee  = sequelize.define('employee', {
     },
     experience:{
         type:Sequelize.INTEGER,
-        defaultValue: 0
+        defaultValue: 1
     },
     level:{
         type:Sequelize.INTEGER,
@@ -71,7 +69,7 @@ const Employee  = sequelize.define('employee', {
     }
 },{
     timestamps: false
-  });
+});
 
 const Issue = sequelize.define('issue',{
     id: {
@@ -101,7 +99,7 @@ const Issue = sequelize.define('issue',{
     }
 },{
     timestamps: false
-  })
+})
 
 const TemporaryCode  = sequelize.define('temporaryCode', {
 
@@ -118,7 +116,7 @@ const TemporaryCode  = sequelize.define('temporaryCode', {
 
 }, {
     timestamps: false
-  });
+});
 
 const Log  = sequelize.define('log', {
     id: {
@@ -140,7 +138,7 @@ const Log  = sequelize.define('log', {
     }
 }, {
     timestamps: false
-  });
+});
 
 const Request = sequelize.define('request',{
     id: {

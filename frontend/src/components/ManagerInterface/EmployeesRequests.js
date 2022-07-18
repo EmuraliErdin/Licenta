@@ -150,6 +150,7 @@ function EmployeesRequests() {
                     <Column bodyStyle={{ textAlign: 'center' }} body={getButton} header="Accept/Decline "/>
                 </DataTable>
             </div>
+            
         </div>
     )
 }

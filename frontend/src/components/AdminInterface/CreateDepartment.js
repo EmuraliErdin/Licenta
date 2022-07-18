@@ -42,7 +42,7 @@ function CreateDepartment() {
         <Toast ref={toast} position="top-left"></Toast>
           {<AdminNavBar/>}
             <div className="fadein animation-duration-1000" id="create-department-container-grid">
-                <h3 id="create-department-header">Create a new prize</h3>
+                <h3 id="create-department-header">Create a new department</h3>
                 <InputText placeholder="Department title" id="create-department-input" value={name} onChange={(e) => setName(e.target.value)}/>
                 
                 <Button id="btn-create-department" label="Submit" onClick={createNewDepartment} />

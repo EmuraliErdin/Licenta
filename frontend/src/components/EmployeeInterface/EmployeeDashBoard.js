@@ -12,12 +12,20 @@ function EmployeeDashBoard() {
     const navigate = useNavigate()
 
     useEffect(() => {
+      getEmployee()
       getExperience()
     },[]);
+
+    const getEmployee = async () => {
+      const responseEmployee = await fetch(`/api/employees/${userStore.employee.id}`)
+      const employee = await  responseEmployee.json();
+      userStore.employee = employee;
+  }
 
     const getExperience = async()=>{
       setLevel(userStore.employee.level)
       setProgress(userStore.employee.experience)
+      
     }
 
     return (
@@ -31,7 +39,7 @@ function EmployeeDashBoard() {
                 </div>
 
                 <div id='employee-experience-section'>
-                  <Knob valueColor={"#ff6600"} rangeColor={"lightgrey"} value={Math.trunc(progress/(level))} />
+                  <Knob valueColor={"#ff6600"} rangeColor={"lightgrey"} value={(Math.trunc(progress/(level))==NaN)?  0 : Math.trunc(progress/(level))} />
                   <div id='employee-experience-text'>
                     <h3>Level: {level}</h3>
                     <h3>Experience until next level: {(level*100-progress)}</h3>

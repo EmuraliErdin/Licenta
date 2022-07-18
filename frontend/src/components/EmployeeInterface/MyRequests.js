@@ -30,10 +30,10 @@ function MyRequests() {
         const requestsList = await responseRequests.json();
         for(let i=0;i<requestsList.length;i++){
             if(requestsList[i].type=='ADD_HOURS'){
-                requestsList[i].type = 'Overtime'
+                requestsList[i].type = 'ADD_HOURS'
             } 
             else{
-                requestsList[i].type = 'Leaving early'
+                requestsList[i].type = 'SUBTRACT_HOURS'
             }
             if(requestsList[i].status == 'PENDING'){
                 requestsList[i].status = 'Pending'
@@ -59,18 +59,11 @@ function MyRequests() {
         updateRequest(e.data, e.newData)
     }
 
-    const updateRequest = async (oldValue, newValue)=> {
-        
-        let reqDate = oldValue.requestDate
-        console.log(newValue.requestDate);
-        if(newValue.reqDate!=undefined){
-             formatDate(newValue.requestDate)
-        }
-        
+    const updateRequest = async (oldValue, newValue)=> {    
         let status = oldValue.status.toUpperCase()
         let obj ={
             id:oldValue.id,
-            requestDate:reqDate,
+            requestDate:newValue.requestDate.toISOString().split("T")[0],
             createDate:newValue.createDate,
             reason:newValue.reason,
             type:newValue.type,
@@ -86,7 +79,7 @@ function MyRequests() {
                 },
                 body: JSON.stringify({
                     id:oldValue.id,
-                    requestDate:reqDate,
+                    requestDate:newValue.requestDate.toISOString().split("T")[0],
                     createDate:newValue.createDate,
                     reason:newValue.reason,
                     type:newValue.type,

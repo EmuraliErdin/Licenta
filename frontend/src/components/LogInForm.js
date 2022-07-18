@@ -47,10 +47,9 @@ function LogInForm() {
         if(response.status===200){
             
             let person = await response.json();
-            userStore.employee=person;
-            userStore.isLogged=true;
-
-            window.sessionStorage.setItem('employeeId',userStore.employee.id)
+            userStore.employee=person
+            console.log(person);
+            userStore.isLogged=true
             
             if(person.isManager===false){
                 navigate('/employee-dashboard');

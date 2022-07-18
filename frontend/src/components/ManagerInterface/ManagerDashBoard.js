@@ -13,11 +13,16 @@ function ManagerDashBoard() {
     const navigate = useNavigate()
 
     useEffect(() => {
+      getEmployee()
       getExperience()
       getNumberOfPendingRequests()
-
-
     },[]);
+
+    const getEmployee = async () => {
+      const responseEmployee = await fetch(`/api/employees/${userStore.employee.id}`)
+      const employee = await  responseEmployee.json();
+      userStore.employee = employee;
+  }
 
     const getNumberOfPendingRequests = async () =>{
       try{
